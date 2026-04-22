@@ -1,0 +1,108 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./app/components/**/*.{js,vue,ts}",
+    "./app/layouts/**/*.vue",
+    "./app/pages/**/*.vue",
+    "./app/plugins/**/*.{js,ts}",
+    "./app/utils/**/*.{js,ts}",
+    "./app/app.vue",
+    "./app/error.vue",
+  ],
+  theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1440px",
+      "3xl": "1600px",
+      "4xl": "1920px",
+      "5xl": "2560px",
+      "6xl": "3840px",
+    },
+    extend: {
+      colors: {
+        white: "hsl(var(--color-white) / <alpha-value>)",
+        light: "hsl(var(--color-light) / <alpha-value>)",
+        dark: "hsl(var(--color-dark) / <alpha-value>)",
+        gold: "hsl(var(--color-gold) / <alpha-value>)",
+      },
+      fontSize: {
+        xs: "var(--text-xs)",
+        sm: "var(--text-sm)",
+        base: "var(--text-base)",
+        lg: "var(--text-lg)",
+        xl: "var(--text-xl)",
+        "2xl": "var(--text-2xl)",
+        "3xl": "var(--text-3xl)",
+        "4xl": "var(--text-4xl)",
+        "5xl": "var(--text-5xl)",
+        "6xl": [
+          "var(--text-6xl)",
+          { lineHeight: "1.05", letterSpacing: "-0.01em" },
+        ],
+        "7xl": [
+          "var(--text-7xl)",
+          { lineHeight: "1", letterSpacing: "-0.02em" },
+        ],
+        "8xl": [
+          "var(--text-8xl)",
+          { lineHeight: "0.95", letterSpacing: "-0.03em" },
+        ],
+        "9xl": [
+          "var(--text-9xl)",
+          { lineHeight: "0.9", letterSpacing: "-0.04em" },
+        ],
+        "10xl": [
+          "var(--text-10xl)",
+          { lineHeight: "0.85", letterSpacing: "-0.05em" },
+        ],
+      },
+      spacing: {
+        "page-margin": "var(--page-margin)",
+        "grid-gutter": "var(--grid-gutter)",
+        "section-gap": "var(--section-gap)",
+        "header-height": "var(--header-height)",
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+      },
+      borderRadius: {
+        sm: "var(--radius-sm)",
+        md: "var(--radius-md)",
+        lg: "var(--radius-lg)",
+      },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        serif: ["Playfair Display", "serif"],
+        mono: ["monospace"],
+      },
+      fontWeight: {
+        light: "300",
+        book: "350",
+        normal: "400",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
+      },
+      gridTemplateColumns: {
+        '14': 'repeat(14, minmax(0, 1fr))',
+      },
+      gridColumn: {
+        'span-13': 'span 13 / span 13',
+        'span-14': 'span 14 / span 14',
+      },
+      gridColumnStart: {
+        '14': '14',
+        '15': '15',
+      },
+      gridColumnEnd: {
+        '14': '14',
+        '15': '15',
+      },
+    },
+  },
+  plugins: [],
+};

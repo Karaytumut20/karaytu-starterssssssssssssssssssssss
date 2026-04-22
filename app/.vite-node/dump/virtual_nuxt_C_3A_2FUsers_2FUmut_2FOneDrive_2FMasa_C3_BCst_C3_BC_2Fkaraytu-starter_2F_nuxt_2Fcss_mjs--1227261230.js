@@ -1,0 +1,6 @@
+// virtual:nuxt:C%3A%2FUsers%2FUmut%2FOneDrive%2FMasa%C3%BCst%C3%BC%2Fkaraytu-starter%2F.nuxt%2Fcss.mjs
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/@fs/C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/tailwindcss/tailwind.css");
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/assets/scss/main.scss");
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnR1YWw6bnV4dDpDJTNBJTJGVXNlcnMlMkZVbXV0JTJGT25lRHJpdmUlMkZNYXNhJUMzJUJDc3QlQzMlQkMlMkZrYXJheXR1LXN0YXJ0ZXIlMkYubnV4dCUyRmNzcy5tanMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFwiQzovVXNlcnMvVW11dC9PbmVEcml2ZS9NYXNhw7xzdMO8L2thcmF5dHUtc3RhcnRlci9ub2RlX21vZHVsZXMvdGFpbHdpbmRjc3MvdGFpbHdpbmQuY3NzXCI7XG5pbXBvcnQgXCJ+L2Fzc2V0cy9zY3NzL21haW4uc2Nzc1wiOyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBOzsifQ==

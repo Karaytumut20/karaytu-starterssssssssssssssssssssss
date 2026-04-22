@@ -1,0 +1,21 @@
+{
+  "time": "20.04.2026 20:02:13",
+  "externalize": {
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/vue/index.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/vue/index.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/ofetch/dist/node.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/ofetch/dist/node.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/ufo/dist/index.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/ufo/dist/index.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/nuxt/node_modules/hookable/dist/index.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/nuxt/node_modules/hookable/dist/index.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unctx/dist/index.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unctx/dist/index.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/@nuxt/nitro-server/dist/runtime/h3-compat.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/@nuxt/nitro-server/dist/runtime/h3-compat.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/errx/dist/index.js": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/errx/dist/index.js",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/pinia/dist/pinia.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/pinia/dist/pinia.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/devalue/index.js": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/devalue/index.js",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/index.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/index.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/plugins.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/plugins.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/utils.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/utils.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/scripts.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/scripts.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/defu/dist/defu.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/defu/dist/defu.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/client.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/unhead/dist/client.mjs",
+    "C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/vue-router/vue-router.node.mjs": "file:///C:/Users/Umut/OneDrive/Masaüstü/karaytu-starter/node_modules/vue-router/vue-router.node.mjs"
+  }
+}

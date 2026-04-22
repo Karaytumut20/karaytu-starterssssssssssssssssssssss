@@ -1,0 +1,8 @@
+// virtual:nuxt:C%3A%2FUsers%2FUmut%2FOneDrive%2FMasa%C3%BCst%C3%BC%2Fkaraytu-starter%2F.nuxt%2Fglobal-polyfills.mjs
+
+if (!("global" in globalThis)) {
+  globalThis.global = globalThis;
+}
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpcnR1YWw6bnV4dDpDJTNBJTJGVXNlcnMlMkZVbXV0JTJGT25lRHJpdmUlMkZNYXNhJUMzJUJDc3QlQzMlQkMlMkZrYXJheXR1LXN0YXJ0ZXIlMkYubnV4dCUyRmdsb2JhbC1wb2x5ZmlsbHMubWpzIl0sInNvdXJjZXNDb250ZW50IjpbIlxuaWYgKCEoXCJnbG9iYWxcIiBpbiBnbG9iYWxUaGlzKSkge1xuICBnbG9iYWxUaGlzLmdsb2JhbCA9IGdsb2JhbFRoaXM7XG59Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxFQUFFLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQztBQUMvQixDQUFDLENBQUMsVUFBVSxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsVUFBVTtBQUNoQyJ9
