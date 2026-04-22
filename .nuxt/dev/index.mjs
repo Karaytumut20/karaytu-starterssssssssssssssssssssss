@@ -808,7 +808,7 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-22T20:43:46Z"
+          "lastmod": "2026-04-22T22:51:54Z"
         },
         "include": [],
         "exclude": [
