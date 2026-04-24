@@ -808,11 +808,12 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-24T21:46:21Z"
+          "lastmod": "2026-04-24T21:59:10Z"
         },
         "include": [],
         "exclude": [
           "/_**",
+          "/_nuxt/**",
           "/_nuxt/**"
         ],
         "includeAppSources": true
