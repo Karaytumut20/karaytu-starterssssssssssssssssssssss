@@ -10,7 +10,7 @@
     "dev": "nuxt dev --port 3000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "npm --prefix admin/package install && nuxt prepare"
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",
