@@ -1,5 +1,6 @@
 <template>
-  <div class="font-sans bg-white text-[#1C2B3A] min-h-screen overflow-x-hidden">
+  <main>
+    <div class="font-sans bg-white text-[#1C2B3A] min-h-screen overflow-x-hidden">
 
     <!-- Hero -->
     <section class="relative min-h-[60vh] flex items-end overflow-hidden">
@@ -129,7 +130,8 @@
       </div>
     </section>
 
-  </div>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">

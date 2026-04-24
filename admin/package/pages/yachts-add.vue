@@ -8,7 +8,10 @@ const router = useRouter();
 const form = ref({
     name: '',
     slug: '',
+    short_description: '',
     description: '',
+    features: [] as string[],
+    amenities: [] as string[],
     capacity: 12,
     length: '20',
     cabins: 1,
@@ -179,7 +182,35 @@ const saveYacht = async () => {
                             </v-col>
                             
                             <v-col cols="12">
-                                <v-textarea v-model="form.description" label="Açıklama" variant="outlined" rows="3"></v-textarea>
+                                <v-textarea v-model="form.short_description" label="Kısa Açıklama (Listeleme ve Detay Sayfası İçin)" variant="outlined" rows="2"></v-textarea>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-textarea v-model="form.description" label="Detaylı Açıklama (Yat Hakkında)" variant="outlined" rows="4"></v-textarea>
+                            </v-col>
+
+                            <v-col cols="12" md="6">
+                                <v-combobox
+                                    v-model="form.features"
+                                    label="Öne Çıkan Özellikler"
+                                    multiple
+                                    chips
+                                    closable-chips
+                                    variant="outlined"
+                                    hint="Yazıp Enter'a basarak ekleyin (Örn: Şık ve modern tasarım)"
+                                    persistent-hint
+                                ></v-combobox>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-combobox
+                                    v-model="form.amenities"
+                                    label="Olanaklar (Yeşil Tikli Liste)"
+                                    multiple
+                                    chips
+                                    closable-chips
+                                    variant="outlined"
+                                    hint="Yazıp Enter'a basarak ekleyin (Örn: Ücretsiz Wi-Fi)"
+                                    persistent-hint
+                                ></v-combobox>
                             </v-col>
 
                             <v-col cols="12" md="6">
@@ -278,7 +309,7 @@ const saveYacht = async () => {
                                                 size="x-small" 
                                                 color="error" 
                                                 class="position-absolute" 
-                                                style="top: -8px; right: -8px; z-index: 10;"
+                                                style="top: 4px; right: 4px; z-index: 10;"
                                                 @click.stop="removeGalleryImage(idx)"
                                             ></v-btn>
                                             <v-text-field v-model="form.gallery_alts[idx]" density="compact" variant="outlined" placeholder="Alt Etiket"></v-text-field>

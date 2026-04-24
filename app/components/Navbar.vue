@@ -1,9 +1,6 @@
 <template>
   <nav
-    class="w-full fixed top-0 left-0 right-0 z-[9999] transition-all duration-500"
-    :class="scrolled
-      ? 'bg-[#0C2340]/98 backdrop-blur-md shadow-lg shadow-black/20'
-      : 'bg-transparent'"
+    class="w-full fixed top-0 left-0 right-0 z-[9999] bg-[#0C2340] shadow-lg shadow-black/20 transition-all duration-500"
   >
     <div class="max-w-[1400px] mx-auto px-6 lg:px-12 h-[76px] flex items-center justify-between">
 

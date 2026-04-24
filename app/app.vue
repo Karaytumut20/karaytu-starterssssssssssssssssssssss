@@ -12,7 +12,7 @@
     <Preloader />
 
     <NuxtLayout>
-      <NuxtPage :transition="pageTransition" />
+      <NuxtPage :page-key="route.fullPath" :transition="pageTransition" />
     </NuxtLayout>
 
     <Menu />
@@ -225,6 +225,7 @@ const pageTransition = {
     });
   },
   onAfterEnter: (el: Element) => {
+    gsap.set(el, { clearProps: "opacity" });
     store.endTransition();
     setTimeout(() => {
       ScrollTrigger.refresh();
@@ -232,6 +233,7 @@ const pageTransition = {
   },
   onEnterCancelled: (el: Element) => {
     gsap.killTweensOf(el);
+    gsap.set(el, { opacity: 1, clearProps: "opacity" });
     store.endTransition();
   },
 };

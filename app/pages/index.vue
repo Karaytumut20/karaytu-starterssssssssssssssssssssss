@@ -1,309 +1,202 @@
 <template>
-  <div class="font-sans bg-white text-[#1C2B3A] min-h-screen overflow-x-hidden">
+  <div class="bg-[#050A10] text-white font-sans min-h-screen overflow-hidden selection:bg-amber-500 selection:text-black" ref="mainContainer">
+    
+    <!-- Background glows -->
+    <div class="fixed top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-amber-600/5 rounded-full blur-[150px] pointer-events-none"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-    <!-- HERO — FlyHigh style pixel-perfect -->
-    <section class="relative h-[85vh] min-h-[650px] flex flex-col overflow-visible bg-[#f8f9fb]">
-      <!-- Background image -->
-      <div class="absolute inset-0 pb-20">
-        <img src="/images/marine_hero_bg.png" alt="İstanbul Boğazı" class="w-full h-full object-cover" />
-        <!-- Adjusted gradient to make text legible but keep the image clear -->
-        <div class="absolute inset-0 bg-gradient-to-r from-white/80 via-white/30 to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-transparent"></div>
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="/images/marine_hero_bg.png" alt="Hero Background" class="w-full h-full object-cover opacity-30" />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#050A10]/10 via-[#050A10]/60 to-[#050A10]"></div>
       </div>
-
-      <!-- Top content -->
-      <div class="relative z-10 max-w-[1200px] mx-auto px-6 w-full pt-32 lg:pt-48">
-        <div class="max-w-xl">
-          <h1 class="text-[#111827] text-[52px] md:text-[64px] font-medium leading-[1.05] tracking-tight mb-6">
-            Hey Buddy! Nereye<br>
-            <span class="font-bold">Yelken Açıyorsun?</span>
-          </h1>
-          <NuxtLink to="/yatlarimiz" class="inline-flex items-center gap-2 text-[#111827] text-[15px] font-bold mt-2 hover:gap-3 transition-all">
-            Keşfet <span class="text-xl leading-none">&rarr;</span>
-          </NuxtLink>
-        </div>
-      </div>
-
-      <!-- Floating booking card — Functional -->
-      <div class="absolute bottom-0 left-0 right-0 z-20 translate-y-1/2">
-        <div class="max-w-[1100px] mx-auto px-6 w-full">
-          <!-- No tabs - single booking form -->
-
-          <!-- Main white card -->
-          <div class="bg-white rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,0,0,0.1)] p-8 relative">
-
-            <!-- Form inputs row -->
-            <div class="flex flex-col md:flex-row items-stretch gap-4">
-              <!-- Kalkış İskelesi + Tur Tipi -->
-              <div class="flex-[1.2] flex items-center border border-gray-200 rounded-2xl p-5 bg-white w-full">
-                <div class="flex-1">
-                  <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">KALKIŞ İSKELESİ</p>
-                  <div class="relative" data-booking-dropdown>
-                    <button @click.stop="toggleDropdown('departure')" class="text-[18px] font-bold text-[#111827] hover:text-[#4f46e5] transition-colors text-left">{{ departureLocations[departure]?.name || 'Seçin' }}</button>
-                    <p class="text-[12px] text-gray-400 mt-1">{{ departureLocations[departure]?.sub || '' }}</p>
-                    <div v-if="openDropdown === 'departure'" class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl py-2 min-w-[200px] z-50">
-                      <button v-for="(loc, key) in departureLocations" :key="key" @click.stop="departure = key as string; openDropdown = null" :class="['block w-full text-left px-4 py-2.5 text-[13px] hover:bg-gray-50', departure === key ? 'text-[#4f46e5] font-bold' : '']"><span class="font-semibold">{{ loc.name }}</span> <span class="text-gray-400 text-[11px] ml-1">{{ loc.sub }}</span></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-px h-12 bg-gray-100 mx-4"></div>
-                <div class="flex-1">
-                  <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">TUR TİPİ</p>
-                  <div class="relative" data-booking-dropdown>
-                    <button @click.stop="toggleDropdown('tourType')" class="text-[18px] font-bold text-[#111827] hover:text-[#4f46e5] transition-colors text-left">{{ tourTypeOptions[selectedTourType] }}</button>
-                    <p class="text-[12px] text-gray-400 mt-1">Özel güzergah</p>
-                    <div v-if="openDropdown === 'tourType'" class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl py-2 min-w-[220px] z-50">
-                      <button v-for="(label, key) in tourTypeOptions" :key="key" @click.stop="selectedTourType = key as string; openDropdown = null" :class="['block w-full text-left px-4 py-2.5 text-[13px] hover:bg-gray-50', selectedTourType === key ? 'text-[#4f46e5] font-bold' : '']">{{ label }}</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tarih + Saat -->
-              <div class="flex-1 flex items-center border border-gray-200 rounded-2xl p-5 bg-white w-full">
-                <div class="flex-1">
-                  <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">KALKIŞ TARİHİ</p>
-                  <input type="date" v-model="departDate" :min="todayStr" class="text-[18px] font-bold text-[#111827] bg-transparent border-none outline-none cursor-pointer w-full" />
-                  <p class="text-[12px] text-gray-400 mt-1">{{ departDate ? formatDateTR(departDate) : 'Tarih seçin' }}</p>
-                </div>
-                <div class="flex-1 pl-6 border-l border-gray-100">
-                  <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">SAAT</p>
-                  <div class="relative" data-booking-dropdown>
-                    <button @click.stop="toggleDropdown('time')" class="text-[18px] font-bold text-[#111827] hover:text-[#4f46e5] transition-colors text-left">{{ selectedTime }}</button>
-                    <p class="text-[12px] text-gray-400 mt-1">Başlangıç saati</p>
-                    <div v-if="openDropdown === 'time'" class="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl py-2 min-w-[140px] z-50 max-h-[250px] overflow-y-auto">
-                      <button v-for="t in timeSlots" :key="t" @click.stop="selectedTime = t; openDropdown = null" :class="['block w-full text-left px-4 py-2 text-[13px] hover:bg-gray-50', selectedTime === t ? 'text-[#4f46e5] font-bold' : '']">{{ t }}</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Search Button & Note -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
-              <p class="text-[13px] text-gray-500 font-medium flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-[#eab308]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Tüm yatlarımızda minimum kiralama süresi <strong class="text-[#111827]">2 saattir.</strong>
-              </p>
-              <button @click="handleSearch" class="bg-[#18181b] hover:bg-black text-white px-8 py-4 rounded-xl font-semibold text-[15px] flex items-center gap-3 transition-colors shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] duration-200 w-full sm:w-auto justify-center">
-                Yat Ara
-                <span class="text-xl leading-none font-light">&rarr;</span>
-              </button>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Spacer to account for absolute positioned card -->
-    <div class="h-32 bg-[#f8f9fb]"></div>
-
-    <!-- POPÜLER TURLAR - Pick the Place Style -->
-    <section class="py-24 bg-[#f8f9fb]">
-      <div class="max-w-[1200px] mx-auto px-6 w-full">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div>
-            <div class="inline-flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm border border-gray-100 mb-4">
-              <div class="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></div>
-              <span class="text-[11px] font-semibold text-[#111827]">Popüler Destinasyonlar 2025</span>
-            </div>
-            <h2 class="text-[48px] md:text-[56px] font-medium text-[#111827] leading-[1.05] tracking-tight">Özel Turlar</h2>
-          </div>
-          <p class="text-gray-500 text-[14px] max-w-sm md:text-right leading-relaxed mb-2">
-            Sizin ve sevdikleriniz için harika rotalarımız ve birlikte keyif alabileceğiniz eşsiz deneyimlerimiz var!
-          </p>
-        </div>
-
-        <!-- Filter Bar (Visual) -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-2 flex flex-wrap items-center justify-between mb-10">
-          <div class="flex flex-wrap items-center gap-4 md:gap-8 px-4 py-2 w-full md:w-auto">
-            <div class="flex-1 md:flex-none">
-              <p class="text-[11px] font-bold text-[#111827] mb-0.5">Destinasyon</p>
-              <p class="text-[12px] text-gray-400">Rota seçin...</p>
-            </div>
-            <div class="hidden md:block w-px h-8 bg-gray-100"></div>
-            <div class="flex-1 md:flex-none">
-              <p class="text-[11px] font-bold text-[#111827] mb-0.5">Kategori</p>
-              <p class="text-[12px] text-gray-400 flex items-center gap-1">Tür seçin <span class="text-[8px]">&#9660;</span></p>
-            </div>
-            <div class="hidden md:block w-px h-8 bg-gray-100"></div>
-            <div class="flex-1 md:flex-none hidden sm:block">
-              <p class="text-[11px] font-bold text-[#111827] mb-0.5">Fiyat</p>
-              <p class="text-[12px] text-gray-400 flex items-center gap-1">Bütçe <span class="text-[8px]">&#9660;</span></p>
-            </div>
-            <div class="hidden md:block w-px h-8 bg-gray-100"></div>
-            <div class="flex-1 md:flex-none hidden sm:block">
-              <p class="text-[11px] font-bold text-[#111827] mb-0.5">Tarih</p>
-              <p class="text-[12px] text-gray-400 flex items-center gap-1">Tarih <span class="text-[8px]">&#9660;</span></p>
-            </div>
-          </div>
-          <NuxtLink to="/deneyimlerimiz" class="bg-[#18181b] hover:bg-black text-white px-8 py-3.5 rounded-xl text-[13px] font-semibold transition-all mt-3 md:mt-0 w-full md:w-auto text-center">
-            Keşfet
-          </NuxtLink>
-        </div>
-
-        <!-- Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="exp in experiences.slice(0,3)" :key="exp.id" class="bg-white rounded-[24px] p-3 shadow-sm border border-gray-100 group">
-            <!-- Card Header -->
-            <div class="flex justify-between items-start px-2 pt-2 pb-3">
-              <div>
-                <h3 class="font-bold text-[#111827] text-[18px] leading-tight">{{ exp.title }}</h3>
-                <p class="text-gray-400 text-[12px] mt-1">İstanbul Boğazı, TR</p>
-              </div>
-              <div class="bg-[#f8f9fb] px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-gray-100 shrink-0">
-                <div class="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
-                <span class="text-[10px] font-semibold text-[#111827]">Popüler</span>
-              </div>
-            </div>
-            
-            <!-- Image -->
-            <div class="relative aspect-[4/3] rounded-[20px] overflow-hidden mb-4">
-              <img :src="exp.main_image||'/images/default.jpg'" :alt="exp.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              
-              <!-- Stats inside image bottom -->
-              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                <div class="flex items-center gap-3 text-[11px] font-medium">
-                  <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ₺{{ Number(exp.starting_price).toLocaleString('tr-TR') }}</span>
-                  <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Özel Tur</span>
-                </div>
-                <span class="text-[11px] font-medium flex items-center gap-1"><svg class="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> Esnek</span>
-              </div>
-            </div>
-            
-            <!-- Card Footer -->
-            <div class="flex items-center justify-between px-2 pb-1">
-              <NuxtLink :to="`/deneyimlerimiz/${exp.slug}`" class="w-8 h-8 rounded-full bg-[#f8f9fb] border border-gray-200 flex items-center justify-center hover:bg-[#111827] hover:border-[#111827] hover:text-white transition-all group/btn shrink-0">
-                <svg class="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19L19 5m0 0v10m0-10H9"/></svg>
-              </NuxtLink>
-              <div class="flex gap-4 text-[9px] text-gray-500 text-right">
-                <div><span class="block font-bold text-[#111827] mb-0.5">Kalkış</span> İstenilen İskele</div>
-                <div><span class="block font-bold text-[#111827] mb-0.5">Süre</span> Min. 2 Saat</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- NASIL ÇALIŞIR -->
-    <section class="py-20 bg-white border-t border-gray-100">
-      <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-4">
-          <div>
-            <span class="text-[#1A7B8A] text-[11px] font-semibold uppercase tracking-[0.28em] block mb-3">Nasıl Çalışır</span>
-            <h2 class="text-[40px] font-bold text-[#0C2340] leading-tight">3 Adımda<br>Rezervasyon</h2>
-          </div>
-          <p class="text-[#6B7A8D] text-[15px] max-w-sm">Online sistemimizle dakikalar içinde yat kiralamanın keyfini çıkarın.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div v-for="(s, i) in steps" :key="i" class="group bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-            <div class="flex items-start justify-between mb-8">
-              <div class="w-12 h-12 rounded-xl bg-[#0C2340] flex items-center justify-center">
-                <svg class="w-5 h-5 text-[#C8A96E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" v-html="s.icon"></svg>
-              </div>
-              <span class="text-[48px] font-black text-gray-100 leading-none select-none">{{ String(i+1).padStart(2,'0') }}</span>
-            </div>
-            <h3 class="text-[20px] font-bold text-[#0C2340] mb-3">{{ s.title }}</h3>
-            <p class="text-[#6B7A8D] text-[14px] leading-relaxed">{{ s.desc }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- YATLARIMIZ - Pick the Place Style -->
-    <section class="py-24 bg-white border-t border-gray-100">
-      <div class="max-w-[1200px] mx-auto px-6 w-full">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div class="inline-flex items-center gap-2 bg-[#f8f9fb] px-3 py-1.5 rounded-full border border-gray-100 mb-4">
-              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
-              <span class="text-[11px] font-semibold text-[#111827]">Özel Seçim</span>
-            </div>
-            <h2 class="text-[48px] md:text-[56px] font-medium text-[#111827] leading-[1.05] tracking-tight">Lüks Yatlar</h2>
-          </div>
-          <p class="text-gray-500 text-[14px] max-w-sm md:text-right leading-relaxed mb-2">
-            İhtiyacınıza uygun kapasite ve özelliklerde, konforlu bir deniz yolculuğu için özenle seçilmiş filomuz.
-          </p>
-        </div>
-
-        <!-- Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="yacht in yachts.slice(0,3)" :key="yacht.id" class="bg-white rounded-[24px] p-3 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] border border-gray-100 group">
-            <!-- Card Header -->
-            <div class="flex justify-between items-start px-2 pt-2 pb-3">
-              <div>
-                <h3 class="font-bold text-[#111827] text-[18px] leading-tight">{{ yacht.name }}</h3>
-                <p class="text-gray-400 text-[12px] mt-1">{{ yacht.capacity }} Kişi Kapasiteli</p>
-              </div>
-              <div class="bg-[#f8f9fb] px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-gray-100 shrink-0">
-                <div class="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                <span class="text-[10px] font-semibold text-[#111827]">Müsait</span>
-              </div>
-            </div>
-            
-            <!-- Image -->
-            <div class="relative aspect-[4/3] rounded-[20px] overflow-hidden mb-4">
-              <img :src="yacht.main_image||'/images/img1.jpg'" :alt="yacht.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" @error="(e)=>(e.target as HTMLImageElement).src='/images/img1.jpg'" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-              
-              <!-- Stats inside image bottom -->
-              <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                <div class="flex items-center gap-3 text-[11px] font-medium">
-                  <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ₺{{ new Intl.NumberFormat('tr-TR').format(yacht.price_hourly||0) }}</span>
-                  <span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Saatlik</span>
-                </div>
-                <span class="text-[11px] font-medium flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full backdrop-blur-sm">Özel Yat</span>
-              </div>
-            </div>
-            
-            <!-- Card Footer -->
-            <div class="flex items-center justify-between px-2 pb-1">
-              <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="w-8 h-8 rounded-full bg-[#f8f9fb] border border-gray-200 flex items-center justify-center hover:bg-[#111827] hover:border-[#111827] hover:text-white transition-all group/btn shrink-0">
-                <svg class="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19L19 5m0 0v10m0-10H9"/></svg>
-              </NuxtLink>
-              <div class="flex gap-4 text-[9px] text-gray-500 text-right">
-                <div><span class="block font-bold text-[#111827] mb-0.5">Uzunluk</span> {{ yacht.length }}m</div>
-                <div><span class="block font-bold text-[#111827] mb-0.5">Kabin</span> Var</div>
-              </div>
-            </div>
-          </div>
+      
+      <div class="relative z-10 max-w-[1400px] w-full mx-auto px-6 flex flex-col items-center text-center">
+        <div class="hero-badge inline-flex items-center gap-3 px-5 py-2 rounded-full border border-amber-500/30 bg-black/40 backdrop-blur-md mb-8">
+          <div class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></div>
+          <span class="text-amber-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em]">{{ settingsForm.hero_badge || 'Lüksün Sınırlarını Keşfedin' }}</span>
         </div>
         
-        <div class="mt-12 flex justify-center">
-          <NuxtLink to="/yatlarimiz" class="inline-flex items-center gap-2 bg-[#f8f9fb] border border-gray-200 text-[#111827] font-semibold text-[13px] px-8 py-3.5 rounded-xl hover:bg-[#111827] hover:text-white transition-all">
-            Tüm Filoyu Gör
+        <h1 class="hero-title text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] font-['Playfair_Display'] mb-8">
+          DENİZDEKİ <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-amber-600 italic">SARAYINIZ</span>
+        </h1>
+        
+        <p class="hero-desc text-lg md:text-xl text-white/60 max-w-2xl font-light mb-12">
+          İstanbul Boğazı'nın eşsiz dokusunu, dünya standartlarında lüks yat filomuz ve kişiye özel hizmet anlayışımızla deneyimleyin.
+        </p>
+        
+        <div class="hero-btn">
+          <NuxtLink to="/yatlarimiz" class="group relative inline-flex items-center justify-center px-8 py-5 text-base font-bold text-black bg-amber-500 rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(245,158,11,0.4)]">
+            <span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+            <span class="relative flex items-center gap-2">
+              Filoyu Keşfet 
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </span>
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- YORUMLAR -->
-    <section v-if="allReviews.length > 0" class="py-20 bg-white">
-      <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div class="text-center mb-14">
-          <span class="text-[#C8A96E] text-[11px] font-semibold uppercase tracking-[0.28em] block mb-3">Misafir Görüşleri</span>
-          <h2 class="text-[40px] font-bold text-[#0C2340]">Misafirlerimiz<br>Ne Diyor?</h2>
+    <!-- Popüler Deneyimler Section (Pixel Perfect) -->
+    <section class="py-24 bg-white relative z-10 text-center">
+      <div class="max-w-[1300px] mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="mb-14">
+          <h4 class="text-[#1d4e89] text-[13px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">DENEYİMLER</h4>
+          <h2 class="text-[#0b213b] text-4xl md:text-5xl font-extrabold mb-4 font-sans tracking-tight">Popüler Deneyimler</h2>
+          <p class="text-gray-500 text-[15px] font-sans">Boğaz turları ve özel organizasyonlar için öne çıkan seçenekler.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div v-for="review in allReviews.slice(0,6)" :key="review.id" class="bg-white border border-gray-100 rounded-2xl p-7 hover:shadow-lg transition-all">
-            <div class="flex text-[#C8A96E] mb-4">
-              <svg v-for="s in 5" :key="s" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          
+          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
+            <div class="h-[180px] overflow-hidden">
+               <img :src="exp.main_image || '/images/default.jpg'" :alt="exp.title" class="w-full h-full object-cover" />
             </div>
-            <p class="text-[#4A5568] text-[14px] leading-relaxed mb-5 italic">"{{ review.comment }}"</p>
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm text-white" :style="{backgroundColor: review.avatar_color||'#1A7B8A'}">{{ review.reviewer_name?.charAt(0)||'U' }}</div>
-              <div>
-                <div class="font-semibold text-[13px] text-[#0C2340]">{{ review.reviewer_name }}</div>
-                <div class="text-[11px] text-[#9CA3AF]">{{ review.created_at ? new Date(review.created_at).toLocaleDateString('tr-TR',{month:'long',year:'numeric'}) : '' }}</div>
-              </div>
+            <div class="p-6 flex flex-col flex-1">
+               <h3 class="text-[#0b213b] text-[17px] font-bold mb-2 font-sans leading-snug">{{ exp.title }}</h3>
+               <p class="text-gray-500 text-[13px] line-clamp-2 leading-relaxed mb-4 font-sans">{{ exp.short_description }}</p>
+               
+               <div class="border-t border-gray-100 my-4"></div>
+               
+               <div class="mb-5">
+                  <p class="text-[#1d4e89] text-[22px] font-extrabold font-sans leading-none">{{ Number(exp.starting_price || 0).toLocaleString('tr-TR') }} TL</p>
+                  <p class="text-gray-400 text-[11px] font-sans mt-1">başlayan fiyatlarla</p>
+               </div>
+               
+               <div class="flex gap-2 mt-auto">
+                  <NuxtLink :to="`/deneyimlerimiz/${exp.slug}`" class="flex-1 text-center py-2.5 rounded-xl border border-[#1d4e89] text-[#1d4e89] font-bold text-[13px] hover:bg-[#f0f4f8] transition-colors font-sans">Detayları Gör</NuxtLink>
+                  <NuxtLink to="/rezervasyon" class="flex-1 text-center py-2.5 rounded-xl bg-[#1d4e89] text-white font-bold text-[13px] hover:bg-[#153a66] transition-colors font-sans">Rezervasyon Yap</NuxtLink>
+               </div>
             </div>
           </div>
+          
         </div>
+        
+        <!-- Bottom Button -->
+        <div class="text-center mt-12">
+          <NuxtLink to="/deneyimlerimiz" class="inline-flex items-center gap-2 bg-[#0b213b] text-white px-8 py-3.5 rounded-xl font-bold text-[14px] hover:bg-[#153a66] transition-colors font-sans shadow-md hover:shadow-lg">
+            Tüm Deneyimleri Görün &rarr;
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Yacht Showcase Grid (Pixel Perfect) -->
+    <section class="py-24 bg-white relative z-10 border-t border-gray-50/50">
+      <div class="max-w-[1300px] mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+          <div>
+            <h4 class="text-[#1d4e89] text-[13px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">FİLOMUZ</h4>
+            <h2 class="text-[#0b213b] text-4xl md:text-5xl font-extrabold font-sans tracking-tight">Yatlarımız</h2>
+          </div>
+          <p class="text-gray-500 text-[15px] font-sans mt-4 md:mt-0">Kişi sayısı ve tur planınıza göre en uygun yatı seçin.</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <NuxtLink v-for="yacht in yachts.slice(0,4)" :key="yacht.id" :to="`/yatlarimiz/${yacht.slug}`" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
+            
+            <!-- Image Area -->
+            <div class="relative h-[200px] overflow-hidden">
+               <img :src="yacht.main_image || '/images/img1.jpg'" :alt="yacht.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+               <!-- Capacity Badge -->
+               <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-[#0b213b] text-[13px] font-bold px-4 py-1.5 rounded-xl shadow-sm">
+                 {{ yacht.capacity }} kişi
+               </div>
+            </div>
+            
+            <!-- Details Area -->
+            <div class="p-6 flex flex-col flex-1">
+               <h3 class="text-[#0b213b] text-[18px] font-bold mb-3 font-sans">{{ yacht.name }}</h3>
+               <p class="text-gray-500 text-[13px] line-clamp-2 leading-relaxed mb-6 font-sans">
+                 {{ yacht.name }}, İstanbul Boğazı'nda lüks ve prestijin zirvesini temsil eder. {{ yacht.length }} metrelik bu görkemli yat, ...
+               </p>
+               
+               <div class="mt-auto">
+                 <div class="w-full h-px bg-gray-100 mb-5"></div>
+                 
+                 <div class="flex justify-between items-center">
+                    <div>
+                       <span class="text-[#0b213b] text-[22px] font-extrabold font-sans leading-none">{{ Number(yacht.price_hourly || 0).toLocaleString('tr-TR') }}</span>
+                       <span class="text-gray-400 text-[12px] font-sans ml-1">TL / saat</span>
+                    </div>
+                    
+                    <div class="w-10 h-10 rounded-xl bg-[#f8fafc] border border-gray-100 flex items-center justify-center text-[#0b213b] group-hover:bg-[#1d4e89] group-hover:text-white transition-colors">
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                    </div>
+                 </div>
+               </div>
+            </div>
+            
+          </NuxtLink>
+        </div>
+        
+        <!-- Bottom Link -->
+        <div class="text-center mt-12">
+          <NuxtLink to="/yatlarimiz" class="inline-flex items-center gap-2 text-[#1d4e89] font-bold text-[15px] hover:text-[#0b213b] transition-colors font-sans">
+            Tüm Yatlarımızı Görün &rarr;
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- Müşteri Yorumları Section (Pixel Perfect) -->
+    <section class="py-24 bg-[#fafbfc] relative z-10 border-t border-gray-100">
+      <div class="max-w-[1300px] mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="text-center mb-14">
+          <h4 class="text-[#216a9a] text-[13px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">MÜŞTERİ YORUMLARI</h4>
+          <h2 class="text-[#0b213b] text-4xl md:text-5xl font-extrabold mb-4 font-sans tracking-tight">Misafirlerimiz Ne Diyor?</h2>
+          <p class="text-gray-500 text-[16px] font-sans">Google'da 5 yıldızlı yorumlarımızı inceleyin.</p>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          
+          <div v-for="review in reviews.slice(0,6)" :key="review.id" class="bg-white rounded-[16px] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
+            <div class="flex justify-between items-start mb-4">
+               <div class="flex items-center gap-3">
+                  <div v-if="!review.avatar_url" class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-lg" :style="{ backgroundColor: review.avatar_color || '#1565c0' }">
+                     {{ review.reviewer_name?.charAt(0)?.toUpperCase() }}
+                  </div>
+                  <div v-else class="w-11 h-11 rounded-full overflow-hidden">
+                     <img :src="review.avatar_url" alt="avatar" class="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                     <h4 class="text-[#0b213b] font-bold text-[15px] leading-tight font-sans">{{ review.reviewer_name }}</h4>
+                     <p class="text-gray-400 text-[13px] font-sans">{{ new Date(review.created_at).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
+                  </div>
+               </div>
+               <!-- Google Logo SVG -->
+               <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            </div>
+            
+            <div class="flex items-center gap-1 mb-3">
+               <svg v-for="i in Math.floor(review.rating || 5)" :key="'star'+i" class="w-4 h-4 text-[#FBBC05]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+               <svg class="w-4 h-4 text-[#4285F4] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            
+            <p class="text-[#0b213b] text-[14px] leading-relaxed font-sans line-clamp-3">{{ review.comment }}</p>
+          </div>
+
+        </div>
+        
+        <!-- Trustindex Badge -->
+        <div class="flex justify-center mt-10">
+          <div class="inline-flex items-center gap-1.5 bg-[#0d825b] text-white px-4 py-2 rounded-lg shadow-sm font-sans font-bold text-[13px] hover:shadow-md transition-shadow cursor-default">
+             Doğrulayan: Trustindex 
+             <svg class="w-4 h-4 opacity-80" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -311,128 +204,81 @@
 </template>
 
 <script setup lang="ts">
-import { useAsyncData, useSupabaseClient, useRouter } from '#imports';
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
+import { useAsyncData, useSupabaseClient, useSeoMeta, definePageMeta } from '#imports';
+import { computed, onMounted, ref } from 'vue';
+import gsap from 'gsap';
 
 definePageMeta({ layout: "custom" });
 
 const supabase = useSupabaseClient();
-const router = useRouter();
-const openDropdown = ref<string|null>(null);
+const mainContainer = ref<HTMLElement | null>(null);
 
-// Departure locations (kalkış iskelesi)
-const departure = ref('bebek');
-const departureLocations: Record<string, { name: string; sub: string }> = {
-  bebek: { name: 'Bebek', sub: 'İstanbul, TR' },
-  kabatas: { name: 'Kabataş', sub: 'İstanbul, TR' },
-  besiktas: { name: 'Beşiktaş', sub: 'İstanbul, TR' },
-  eminonu: { name: 'Eminönü', sub: 'İstanbul, TR' },
-  sariyer: { name: 'Sarıyer', sub: 'İstanbul, TR' },
-  kuruçesme: { name: 'Kuruçeşme', sub: 'İstanbul, TR' },
-  istinye: { name: 'İstinye', sub: 'İstanbul, TR' },
-};
-
-// Tour type
-const selectedTourType = ref('bogaz');
-const tourTypeOptions: Record<string, string> = {
-  'bogaz': 'Boğaz Turu',
-  'adalar': 'Adalar Turu',
-  'yuzme': 'Yüzme Turu',
-  'evlilik': 'Evlilik Teklifi',
-};
-
-// Date
-const todayStr = computed(() => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-});
-const departDate = ref(todayStr.value);
-
-// Time slots
-const selectedTime = ref('10:00');
-const timeSlots = ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
-
-// Format date to Turkish
-function formatDateTR(dateStr: string): string {
-  if (!dateStr) return '';
-  const d = new Date(dateStr + 'T00:00:00');
-  const days = ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'];
-  const months = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
-  return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]}`;
-}
-
-// Dropdown toggle
-function toggleDropdown(name: string) {
-  openDropdown.value = openDropdown.value === name ? null : name;
-}
-
-// Close dropdown on outside click
-const handleOutsideClick = (e: Event) => {
-  const target = e.target as HTMLElement;
-  if (!target.closest('[data-booking-dropdown]')) {
-    openDropdown.value = null;
-  }
-};
-onMounted(() => { document.addEventListener('click', handleOutsideClick); });
-onUnmounted(() => { document.removeEventListener('click', handleOutsideClick); });
-
-// Handle search → navigate to /rezervasyon with all fields pre-filled
-function handleSearch() {
-  const tourNames: Record<string, string> = { bogaz: 'Boğaz Turu', adalar: 'Adalar Turu', yuzme: 'Yüzme Turu', evlilik: 'Evlilik Teklifi' };
-  const pickupNames: Record<string, string> = { bebek: 'Bebek', kabatas: 'Kabataş', besiktas: 'Beşiktaş', eminonu: 'Eminönü', sariyer: 'Sarıyer', kuruçesme: 'Kuruçeşme', istinye: 'İstinye' };
-  const query: Record<string, string> = {
-    pickup: pickupNames[departure.value] || 'Bebek',
-    tourType: tourNames[selectedTourType.value] || 'Boğaz Turu',
-    time: selectedTime.value,
-  };
-  if (departDate.value) query.date = departDate.value;
-  router.push({ path: '/rezervasyon', query });
-}
-const steps = [
-  { title: 'Yatınızı Seçin', desc: 'Kişi sayısı ve etkinlik türüne göre en uygun yatı belirleyin.', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>' },
-  { title: 'Tarih Belirleyin', desc: 'Müsaitlik takviminden istediğiniz gün ve saati seçin.', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>' },
-  { title: 'Onaylayın', desc: 'Güvenli ödeme ile %50 ön ödeme yapın, rezervasyon anında kesinleşsin.', icon: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>' },
-];
-
-const { data: homeData } = await useAsyncData('home-all-data', async () => {
-  if (import.meta.server) return { yachts: [], experiences: [], settings: [], reviews: [] };
-  const [yRes, eRes, sRes, rRes] = await Promise.all([
-    supabase.from('yachts').select('*').order('created_at', { ascending: true }).limit(4),
-    supabase.from('experiences').select('*').order('created_at', { ascending: true }).limit(4),
+const { data: homeData, pending } = await useAsyncData('home-all-data-lux', async () => {
+  if (import.meta.server) return { yachts: [], settings: [], experiences: [], reviews: [] };
+  const [yRes, sRes, eRes, rRes] = await Promise.all([
+    supabase.from('yachts').select('*').eq('is_active', true).order('created_at', { ascending: true }).limit(4),
     supabase.from('site_settings').select('*'),
-    supabase.from('reviews').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(6),
+    supabase.from('experiences').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(4),
+    supabase.from('reviews').select('*').eq('is_active', true).order('created_at', { ascending: false }).limit(6)
   ]);
-  return { yachts: yRes.data||[], experiences: eRes.data||[], settings: sRes.data||[], reviews: rRes.data||[] };
+  return { 
+    yachts: yRes.data || [], 
+    settings: sRes.data || [],
+    experiences: eRes.data || [],
+    reviews: rRes.data || []
+  };
 }, { lazy: true });
 
 const fallbackYachts = [
-  { id:'1', name:'Royal', slug:'royal', capacity:36, length:'24.0', price_hourly:7950, main_image:'/images/img4.jpg' },
-  { id:'2', name:'Orion', slug:'orion', capacity:24, length:'26.0', price_hourly:6800, main_image:'/images/luxury_yacht_sunset.png' },
-  { id:'3', name:'Prestige', slug:'prestige', capacity:12, length:'22.5', price_hourly:5950, main_image:'/images/img1.jpg' },
-  { id:'4', name:'Classic', slug:'classic', capacity:12, length:'21.5', price_hourly:4950, main_image:'/images/img2.jpg' },
-];
-const fallbackExperiences = [
-  { id:'e1', title:'Boğaz Turu', slug:'istanbul-bogazi-ozel-yat-turu', starting_price:9900, main_image:'/images/img4.jpg' },
-  { id:'e2', title:'Yemekli Yat Turu', slug:'yemekli-yat-turu', starting_price:14200, main_image:'/images/luxury_yacht_sunset.png' },
-  { id:'e3', title:'Adalar Turu', slug:'adalar-tur', starting_price:29500, main_image:'/images/img2.jpg' },
-  { id:'e4', title:'Evlilik Teklifi', slug:'evlilik-teklifi', starting_price:14200, main_image:'/images/img3.jpg' },
+  { id:'1', name:'YatigoTR Royal', slug:'yatigo-royal', capacity:36, length:'24.0', price_hourly:7950, main_image:'/images/img4.jpg' },
+  { id:'2', name:'YatigoTR Orion', slug:'yatigo-orion', capacity:24, length:'26.0', price_hourly:6800, main_image:'/images/luxury_yacht_sunset.png' },
+  { id:'3', name:'YatigoTR Prestige', slug:'yatigo-prestige', capacity:12, length:'22.5', price_hourly:5950, main_image:'/images/img1.jpg' },
 ];
 
 const yachts = computed(() => { const d = homeData.value?.yachts; return d?.length ? d : fallbackYachts; });
-const experiences = computed(() => { const d = homeData.value?.experiences; return d?.length ? d : fallbackExperiences; });
-const allReviews = computed(() => homeData.value?.reviews || []);
+const experiences = computed(() => homeData.value?.experiences || []);
+const reviews = computed(() => homeData.value?.reviews || []);
 
-const settingsForm = ref<Record<string,any>>({
-  hero_title: 'İstanbul Boğazında\nNereye Gidiyorsunuz?',
-  hero_subtitle: '',
-  hero_badge: 'Türkiye\'nin #1 Yat Kiralama Platformu',
-  stats_years: '16+', stats_rating: '4.8', stats_guests: '65Bin+',
+const settingsForm = ref<Record<string,any>>({});
+if (homeData.value?.settings?.length) {
+   homeData.value.settings.forEach((item: any) => { settingsForm.value[item.key_name] = item.value; });
+}
+
+useSeoMeta({ 
+  title: 'Lüks Yat Kiralama | İstanbul Boğazı', 
+  description: 'İstanbul Boğazı\'nda elit yat kiralama deneyimi. Awwwards standartlarında lüks.' 
 });
 
-watch(() => homeData.value?.settings, (s) => {
-  if (s?.length) {
-    s.forEach((item: any) => { if (settingsForm.value[item.key_name] !== undefined) settingsForm.value[item.key_name] = item.value; });
-    useSeoMeta({ title: settingsForm.value.site_meta_title||'YatigoTR Yatçılık', description: settingsForm.value.site_meta_description||'İstanbul Boğazı\'nda özel yat kiralama.' });
-  }
-}, { immediate: true });
+onMounted(() => {
+  // GSAP Animations
+  const tl = gsap.timeline();
+  
+  tl.fromTo('.hero-badge', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .fromTo('.hero-title', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1, ease: 'power4.out' }, '-=0.5')
+    .fromTo('.hero-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+    .fromTo('.hero-btn', { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' }, '-=0.4');
+
+  // Simple scroll animation for bento boxes (using IntersectionObserver)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        gsap.to(entry.target, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.bento-box, .yacht-item, .section-header').forEach((el) => {
+    gsap.set(el, { opacity: 0, y: 50 });
+    observer.observe(el);
+  });
+});
 </script>
+
+<style scoped>
+/* Glassmorphism utilities */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+</style>

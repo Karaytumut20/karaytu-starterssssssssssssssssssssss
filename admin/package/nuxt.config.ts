@@ -36,14 +36,6 @@ export default defineNuxtConfig({
     define: {
       "process.env.DEBUG": false,
     },
-    server: {
-      hmr: {
-        protocol: 'ws',
-        host: '127.0.0.1',
-        port: 24679,
-        clientPort: 24679
-      },
-    },
   },
 
   nitro: {

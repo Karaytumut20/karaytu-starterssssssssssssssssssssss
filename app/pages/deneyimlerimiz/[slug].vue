@@ -1,5 +1,6 @@
 <template>
-  <div class="font-sans bg-white text-[#1C2B3A] min-h-screen overflow-x-hidden">
+  <main>
+    <div class="font-sans bg-white text-[#1C2B3A] min-h-screen overflow-x-hidden">
 
     <div v-if="pending" class="w-full h-[60vh] flex items-center justify-center">
       <div class="w-10 h-10 border-2 border-[#E8E0D0] border-t-[#0C2340] rounded-full animate-spin"></div>
@@ -161,7 +162,8 @@
        </div><!-- /max-w -->
       </div><!-- /bg-white -->
     </div><!-- /v-else -->
-  </div><!-- /root -->
+    </div><!-- /root -->
+  </main>
 </template>
 
 <script setup lang="ts">

@@ -11,7 +11,10 @@ const yachtId = route.params.id as string;
 const form = ref({
     name: '',
     slug: '',
+    short_description: '',
     description: '',
+    features: [] as string[],
+    amenities: [] as string[],
     capacity: 12,
     length: '20',
     cabins: 1,
@@ -71,6 +74,22 @@ const fetchYacht = async () => {
             }
             if (!Array.isArray(form.value.faq)) {
                 form.value.faq = [];
+            }
+
+            // parse features
+            if (typeof form.value.features === 'string') {
+                try { form.value.features = JSON.parse(form.value.features); } catch(e) { form.value.features = []; }
+            }
+            if (!Array.isArray(form.value.features)) {
+                form.value.features = [];
+            }
+
+            // parse amenities
+            if (typeof form.value.amenities === 'string') {
+                try { form.value.amenities = JSON.parse(form.value.amenities); } catch(e) { form.value.amenities = []; }
+            }
+            if (!Array.isArray(form.value.amenities)) {
+                form.value.amenities = [];
             }
         }
     } catch (err: any) {
@@ -214,7 +233,35 @@ onMounted(() => {
                             </v-col>
                             
                             <v-col cols="12">
-                                <v-textarea v-model="form.description" label="Açıklama" variant="outlined" rows="3"></v-textarea>
+                                <v-textarea v-model="form.short_description" label="Kısa Açıklama (Listeleme ve Detay Sayfası İçin)" variant="outlined" rows="2"></v-textarea>
+                            </v-col>
+                            <v-col cols="12">
+                                <v-textarea v-model="form.description" label="Detaylı Açıklama (Yat Hakkında)" variant="outlined" rows="4"></v-textarea>
+                            </v-col>
+
+                            <v-col cols="12" md="6">
+                                <v-combobox
+                                    v-model="form.features"
+                                    label="Öne Çıkan Özellikler"
+                                    multiple
+                                    chips
+                                    closable-chips
+                                    variant="outlined"
+                                    hint="Yazıp Enter'a basarak ekleyin (Örn: Şık ve modern tasarım)"
+                                    persistent-hint
+                                ></v-combobox>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <v-combobox
+                                    v-model="form.amenities"
+                                    label="Olanaklar (Yeşil Tikli Liste)"
+                                    multiple
+                                    chips
+                                    closable-chips
+                                    variant="outlined"
+                                    hint="Yazıp Enter'a basarak ekleyin (Örn: Ücretsiz Wi-Fi)"
+                                    persistent-hint
+                                ></v-combobox>
                             </v-col>
 
                             <v-col cols="12" md="6">
@@ -299,13 +346,13 @@ onMounted(() => {
                                         <!-- Mevcut Resimler -->
                                         <div v-for="(img, idx) in form.gallery" :key="'exist-'+idx" class="position-relative" style="width: 150px;">
                                             <v-img :src="img" width="150" height="150" cover class="rounded border bg-white mb-2"></v-img>
-                                            <v-chip size="x-small" color="primary" class="position-absolute" style="bottom: 40px; left: 4px; z-index: 10;">Mevcut</v-chip>
+                                            <v-chip size="x-small" color="primary" class="position-absolute" style="top: 4px; left: 4px; z-index: 10;">Mevcut</v-chip>
                                             <v-btn 
                                                 icon="mdi-close" 
                                                 size="x-small" 
                                                 color="error" 
                                                 class="position-absolute" 
-                                                style="top: -8px; right: -8px; z-index: 10;"
+                                                style="top: 4px; right: 4px; z-index: 10;"
                                                 @click.stop="removeExistingGalleryImage(idx)"
                                                 title="Mevcut resmi sil"
                                             ></v-btn>
@@ -315,13 +362,13 @@ onMounted(() => {
                                         <!-- Yeni Eklenecek Resimler -->
                                         <div v-for="(img, idx) in galleryPreviews" :key="'new-'+idx" class="position-relative" style="width: 150px;">
                                             <v-img :src="img" width="150" height="150" cover class="rounded border bg-white opacity-80 mb-2"></v-img>
-                                            <v-chip size="x-small" color="success" class="position-absolute" style="bottom: 40px; left: 4px; z-index: 10;">Yeni Eklenecek</v-chip>
+                                            <v-chip size="x-small" color="success" class="position-absolute" style="top: 4px; left: 4px; z-index: 10;">Yeni Eklenecek</v-chip>
                                             <v-btn 
                                                 icon="mdi-close" 
                                                 size="x-small" 
                                                 color="error" 
                                                 class="position-absolute" 
-                                                style="top: -8px; right: -8px; z-index: 10;"
+                                                style="top: 4px; right: 4px; z-index: 10;"
                                                 @click.stop="removeNewGalleryImage(idx)"
                                                 title="İptal et"
                                             ></v-btn>
