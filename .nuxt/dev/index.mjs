@@ -644,10 +644,10 @@ const _inlineRuntimeConfig = {
       "/confirm": {
         "ssr": false
       },
-      "/admin/**": {
-        "proxy": {
-          "to": "http://127.0.0.1:3005/admin/**",
-          "_proxyStripBase": "/admin"
+      "/admin": {
+        "redirect": {
+          "to": "/admin/",
+          "statusCode": 307
         }
       },
       "/_ipx/**": {
@@ -808,12 +808,11 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-24T21:59:10Z"
+          "lastmod": "2026-04-24T22:38:47Z"
         },
         "include": [],
         "exclude": [
           "/_**",
-          "/_nuxt/**",
           "/_nuxt/**"
         ],
         "includeAppSources": true

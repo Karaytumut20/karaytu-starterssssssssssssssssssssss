@@ -14,27 +14,27 @@ const sources = [
         "urls": [
             {
                 "loc": "/blog",
-                "lastmod": "2026-04-22T01:34:46.905Z"
+                "lastmod": "2026-04-22T18:11:08.611Z"
             },
             {
                 "loc": "/deneyimlerimiz",
-                "lastmod": "2026-04-22T00:58:33.679Z"
+                "lastmod": "2026-04-24T08:38:42.546Z"
             },
             {
                 "loc": "/giris",
-                "lastmod": "2026-04-22T01:34:46.632Z"
+                "lastmod": "2026-04-22T17:59:56.622Z"
             },
             {
                 "loc": "/hakkimizda",
-                "lastmod": "2026-04-22T01:34:46.640Z"
+                "lastmod": "2026-04-22T18:11:08.608Z"
             },
             {
                 "loc": "/hesabim",
-                "lastmod": "2026-04-22T02:21:39.378Z"
+                "lastmod": "2026-04-22T13:49:07.485Z"
             },
             {
                 "loc": "/iletisim",
-                "lastmod": "2026-04-22T01:34:46.669Z"
+                "lastmod": "2026-04-22T18:11:08.609Z"
             },
             {
                 "loc": "/kayit",
@@ -46,23 +46,23 @@ const sources = [
             },
             {
                 "loc": "/rezervasyon",
-                "lastmod": "2026-04-22T01:34:46.716Z"
+                "lastmod": "2026-04-24T21:44:22.698Z"
             },
             {
                 "loc": "/sikca-sorulanlar",
-                "lastmod": "2026-04-22T01:34:46.752Z"
+                "lastmod": "2026-04-22T18:11:08.611Z"
             },
             {
                 "loc": "/yat-kiralama-fiyatlari",
-                "lastmod": "2026-04-22T01:34:46.894Z"
+                "lastmod": "2026-04-24T08:38:53.904Z"
             },
             {
                 "loc": "/yatlarimiz",
-                "lastmod": "2026-04-22T01:34:47.104Z"
+                "lastmod": "2026-04-22T23:02:45.711Z"
             },
             {
                 "loc": "/",
-                "lastmod": "2026-04-22T01:34:46.682Z"
+                "lastmod": "2026-04-23T00:31:13.829Z"
             },
             {
                 "loc": "/contact"

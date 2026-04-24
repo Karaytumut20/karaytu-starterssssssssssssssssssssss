@@ -1,0 +1,1 @@
+import{_ as o,a as t,c as a,e as c,w as _,f as s,B as r}from"./6ogwS-w6.js";const p={};function f(l,m){const e=r,n=t("v-app");return c(),a(n,null,{default:_(()=>[s(e)]),_:1})}const x=o(p,[["render",f]]);export{x as default};

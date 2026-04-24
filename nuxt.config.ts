@@ -68,8 +68,10 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/admin/**': { proxy: process.env.ADMIN_URL ? `${process.env.ADMIN_URL}/**` : 'http://127.0.0.1:3005/admin/**' }
+    '/admin': { redirect: '/admin/' }
   },
+
+
 
   ignore: [
     "admin/**",

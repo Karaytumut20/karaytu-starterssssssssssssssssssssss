@@ -3,9 +3,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "concurrently \"nuxt dev --port 3000\" \"npm run dev:admin\"",
-    "dev:admin": "cd admin/package && nuxt dev --port 3005",
+    "build:admin": "cd admin/package && nuxt generate",
+    "copy:admin": "node copy-admin.mjs",
+    "build:main": "nuxt build",
+    "build": "npm run build:admin && npm run copy:admin && npm run build:main",
+    "dev": "nuxt dev --port 3000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

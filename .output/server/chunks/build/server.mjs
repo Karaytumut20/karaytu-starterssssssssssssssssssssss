@@ -1,12 +1,12 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, inject, defineComponent, shallowRef, h, resolveComponent, computed, ref, useAttrs, useTemplateRef, mergeProps, toRef, isRef, getCurrentInstance, unref, createElementBlock, provide, cloneVNode, toValue, onServerPrefetch, reactive, useSSRContext, defineAsyncComponent, shallowReactive, Suspense, Fragment, createApp, watch, withCtx, createTextVNode, nextTick, createVNode, onErrorCaptured, resolveDynamicComponent, effectScope, getCurrentScope, isReadonly, toRaw, isShallow, isReactive, customRef } from 'vue';
-import { o as parseQuery, q as defu, r as hasProtocol, n as joinURL, v as parseURL, w as encodePath, x as decodePath, y as getContext, z as withQuery, A as isScriptProtocol, B as withTrailingSlash, C as withoutTrailingSlash, D as sanitizeStatusCode, E as withLeadingSlash, $ as $fetch, F as baseURL, l as createError$1, G as executeAsync, H as getHeader, I as encodeParam, J as setCookie, K as setHeader, L as camelCase, M as getRequestHeaders, N as withBase, O as klona, P as getRequestHeader, Q as getCookie, R as deleteCookie } from '../_/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { hasInjectionContext, inject, defineComponent, shallowRef, h, resolveComponent, computed, ref, useAttrs, useTemplateRef, mergeProps, toRef, isRef, unref, getCurrentInstance, createElementBlock, provide, cloneVNode, toValue, onServerPrefetch, reactive, useSSRContext, defineAsyncComponent, shallowReactive, Suspense, Fragment, createApp, watch, withCtx, createTextVNode, nextTick, createVNode, onErrorCaptured, resolveDynamicComponent, effectScope, getCurrentScope, isReadonly, toRaw, isShallow, isReactive, customRef } from 'vue';
+import { o as parseQuery, q as defu, r as hasProtocol, n as joinURL, v as parseURL, w as encodePath, x as decodePath, y as withQuery, z as isScriptProtocol, A as getContext, B as withTrailingSlash, C as withoutTrailingSlash, D as sanitizeStatusCode, E as withLeadingSlash, $ as $fetch, F as baseURL, l as createError$1, G as executeAsync, H as getHeader, I as encodeParam, J as setCookie, K as setHeader, L as camelCase, M as getRequestHeaders, N as withBase, O as klona, P as getRequestHeader, Q as getCookie, R as deleteCookie } from '../_/nitro.mjs';
 import { defineStore, storeToRefs, setActivePinia, createPinia, shouldHydrate } from 'pinia';
-import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
+import { useRoute as useRoute$1, RouterView, useRouter as useRouter$1, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { createServerClient, parseCookieHeader } from '@supabase/ssr';
 import { createHash } from 'node:crypto';
 import { isPlainObject } from '@vue/shared';
 import { defineWebPage, defineOrganization, defineLocalBusiness, defineWebSite, defineBreadcrumb, SchemaOrgUnheadPlugin } from '@unhead/schema-org/vue';
-import { ssrRenderAttrs, ssrRenderSlot, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderComponent, ssrRenderStyle, ssrRenderAttr, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
+import { ssrRenderAttrs, ssrRenderSlot, ssrRenderList, ssrRenderClass, ssrInterpolate, ssrRenderComponent, ssrRenderStyle, ssrRenderAttr, ssrIncludeBooleanAttr, ssrRenderSuspense, ssrRenderVNode } from 'vue/server-renderer';
 import { u as useSeoMeta$1, a as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
 import 'node:http';
 import 'node:https';
@@ -772,9 +772,7 @@ const matcher = /* @__PURE__ */ (() => {
     }
     let s = p.split("/"), l = s.length;
     if (l > 1) {
-      if (s[1] === "admin") {
-        r.unshift({ data: $1, params: { "_": s.slice(2).join("/") } });
-      } else if (s[1] === "_ipx") {
+      if (s[1] === "_ipx") {
         r.unshift({ data: $1, params: { "_": s.slice(2).join("/") } });
       }
     }
@@ -819,189 +817,127 @@ function toArray$2(value) {
 const __nuxt_page_meta$d = {
   layout: "custom"
 };
-const __nuxt_page_meta$c = {
-  layout: "custom"
-};
+const __nuxt_page_meta$c = { layout: "custom" };
 const __nuxt_page_meta$b = {
   layout: "custom"
 };
-const __nuxt_page_meta$a = {
-  layout: "custom"
-};
-const __nuxt_page_meta$9 = {
-  layout: "custom"
-};
-const __nuxt_page_meta$8 = {
-  layout: "custom"
-};
-const __nuxt_page_meta$7 = {
-  layout: false
-  // Hide navbar and footer for standard full page auth layout
-};
-const __nuxt_page_meta$6 = {
-  layout: "custom"
-};
-const useStateKeyPrefix = "$s";
-function useState(...args) {
-  const autoKey = typeof args[args.length - 1] === "string" ? args.pop() : void 0;
-  if (typeof args[0] !== "string") {
-    args.unshift(autoKey);
-  }
-  const [_key, init4] = args;
-  if (!_key || typeof _key !== "string") {
-    throw new TypeError("[nuxt] [useState] key must be a string: " + _key);
-  }
-  if (init4 !== void 0 && typeof init4 !== "function") {
-    throw new Error("[nuxt] [useState] init must be a function: " + init4);
-  }
-  const key = useStateKeyPrefix + _key;
-  const nuxtApp = useNuxtApp();
-  const state = toRef(nuxtApp.payload.state, key);
-  if (init4) {
-    nuxtApp._state[key] ??= { _default: init4 };
-  }
-  if (state.value === void 0 && init4) {
-    const initialValue = init4();
-    if (isRef(initialValue)) {
-      nuxtApp.payload.state[key] = initialValue;
-      return initialValue;
-    }
-    state.value = initialValue;
-  }
-  return state;
-}
-const useSupabaseUser = () => useState("supabase_user", () => null);
-const __nuxt_page_meta$5 = {
-  layout: "custom",
-  middleware: [
-    function(to, from) {
-      const user2 = useSupabaseUser();
-      if (!user2.value) {
-        return navigateTo("/giris");
-      }
-    }
-  ]
-};
-const __nuxt_page_meta$4 = {
-  layout: "custom"
-};
-const __nuxt_page_meta$3 = {
-  layout: "custom"
-};
-const __nuxt_page_meta$2 = {
-  layout: "custom"
-};
-const __nuxt_page_meta$1 = {
-  layout: "custom"
-};
-const __nuxt_page_meta = {
-  layout: "custom"
-};
+const __nuxt_page_meta$a = { layout: "custom" };
+const __nuxt_page_meta$9 = { layout: "custom" };
+const __nuxt_page_meta$8 = { layout: "custom" };
+const __nuxt_page_meta$7 = { layout: false };
+const __nuxt_page_meta$6 = { layout: "custom" };
+const __nuxt_page_meta$5 = { layout: "custom" };
+const __nuxt_page_meta$4 = { layout: "custom" };
+const __nuxt_page_meta$3 = { layout: "custom" };
+const __nuxt_page_meta$2 = { layout: "custom" };
+const __nuxt_page_meta$1 = { layout: "custom" };
+const __nuxt_page_meta = { layout: "custom" };
 const _routes = [
   {
     name: "blog-slug",
     path: "/blog/:slug()",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./_slug_-DR4JfWjX.mjs')
+    component: () => import('./_slug_-CfV-46gD.mjs')
   },
   {
     name: "deneyimlerimiz-slug",
     path: "/deneyimlerimiz/:slug()",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./_slug_-CWx6OJ8w.mjs')
+    component: () => import('./_slug_-CUtg7xCe.mjs')
   },
   {
     name: "yat-turu-organizasyon-slug",
     path: "/yat-turu-organizasyon/:slug()",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./_slug_-sHiXLkK-.mjs')
+    component: () => import('./_slug_-DJ3GiNMe.mjs')
   },
   {
     name: "yatlarimiz-slug",
     path: "/yatlarimiz/:slug()",
     meta: __nuxt_page_meta$a || {},
-    component: () => import('./_slug_-CJVvQJGa.mjs')
+    component: () => import('./_slug_-CAQNFF_u.mjs')
   },
   {
     name: "blog",
     path: "/blog",
     meta: __nuxt_page_meta$9 || {},
-    component: () => import('./index-nKcb83qZ.mjs')
+    component: () => import('./index-BxYJpgs1.mjs')
   },
   {
     name: "deneyimlerimiz",
     path: "/deneyimlerimiz",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./index-CQcz6S4D.mjs')
+    component: () => import('./index-DE5uQb8Q.mjs')
   },
   {
     name: "giris",
     path: "/giris",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./giris-b1cC2TKK.mjs')
+    component: () => import('./giris-CztwxMPe.mjs')
   },
   {
     name: "hakkimizda",
     path: "/hakkimizda",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./hakkimizda-Cr46TSQD.mjs')
+    component: () => import('./hakkimizda-DxnJzOVW.mjs')
   },
   {
     name: "hesabim",
     path: "/hesabim",
-    meta: __nuxt_page_meta$5 || {},
-    component: () => import('./hesabim-LAKNK8K3.mjs')
+    meta: { "middleware": "auth" },
+    component: () => import('./hesabim-CPnM4YGE.mjs')
   },
   {
     name: "iletisim",
     path: "/iletisim",
-    meta: __nuxt_page_meta$4 || {},
-    component: () => import('./iletisim-DSEukO16.mjs')
+    meta: __nuxt_page_meta$5 || {},
+    component: () => import('./iletisim-v_luMMrf.mjs')
   },
   {
     name: "kayit",
     path: "/kayit",
-    component: () => import('./kayit-DQTTeTDs.mjs')
+    component: () => import('./kayit-DzmloMtL.mjs')
   },
   {
     name: "online-odeme",
     path: "/online-odeme",
-    component: () => import('./online-odeme-DJHHxuGb.mjs')
+    component: () => import('./online-odeme-CXioDcWt.mjs')
   },
   {
     name: "rezervasyon",
     path: "/rezervasyon",
-    meta: __nuxt_page_meta$3 || {},
-    component: () => import('./rezervasyon-D3ayUkV7.mjs')
+    meta: __nuxt_page_meta$4 || {},
+    component: () => import('./rezervasyon-BM6LN5I2.mjs')
   },
   {
     name: "sikca-sorulanlar",
     path: "/sikca-sorulanlar",
-    component: () => import('./sikca-sorulanlar-B2vdGrW5.mjs')
+    meta: __nuxt_page_meta$3 || {},
+    component: () => import('./sikca-sorulanlar-BcQYaHvx.mjs')
   },
   {
     name: "yat-kiralama-fiyatlari",
     path: "/yat-kiralama-fiyatlari",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./yat-kiralama-fiyatlari-fiU78Gxs.mjs')
+    component: () => import('./yat-kiralama-fiyatlari-DcGTiK9I.mjs')
   },
   {
     name: "yatlarimiz",
     path: "/yatlarimiz",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-D66EpjVD.mjs')
+    component: () => import('./index-DcswwWGp.mjs')
   },
   {
     name: "index",
     path: "/",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-IgNUARWv.mjs')
+    component: () => import('./index-C8o0Ph2J.mjs')
   },
   {
     name: "contact",
     path: "/contact",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-IgNUARWv.mjs')
+    component: () => import('./index-C8o0Ph2J.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1437,7 +1373,37 @@ const serverSupabaseSession = async (event) => {
   delete session?.user;
   return session;
 };
+const useStateKeyPrefix = "$s";
+function useState(...args) {
+  const autoKey = typeof args[args.length - 1] === "string" ? args.pop() : void 0;
+  if (typeof args[0] !== "string") {
+    args.unshift(autoKey);
+  }
+  const [_key, init4] = args;
+  if (!_key || typeof _key !== "string") {
+    throw new TypeError("[nuxt] [useState] key must be a string: " + _key);
+  }
+  if (init4 !== void 0 && typeof init4 !== "function") {
+    throw new Error("[nuxt] [useState] init must be a function: " + init4);
+  }
+  const key = useStateKeyPrefix + _key;
+  const nuxtApp = useNuxtApp();
+  const state = toRef(nuxtApp.payload.state, key);
+  if (init4) {
+    nuxtApp._state[key] ??= { _default: init4 };
+  }
+  if (state.value === void 0 && init4) {
+    const initialValue = init4();
+    if (isRef(initialValue)) {
+      nuxtApp.payload.state[key] = initialValue;
+      return initialValue;
+    }
+    state.value = initialValue;
+  }
+  return state;
+}
 const useSupabaseSession = () => useState("supabase_session", () => null);
+const useSupabaseUser = () => useState("supabase_user", () => null);
 function useRequestEvent(nuxtApp) {
   nuxtApp ||= useNuxtApp();
   return nuxtApp.ssrContext?.event;
@@ -2958,7 +2924,7 @@ const __nuxt_component_0 = defineComponent({
     return () => null;
   }
 });
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
+const _sfc_main$a = /* @__PURE__ */ defineComponent({
   __name: "GridHelper",
   __ssrInlineRender: true,
   setup(__props) {
@@ -2976,13 +2942,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$9 = _sfc_main$9.setup;
-_sfc_main$9.setup = (props, ctx) => {
+const _sfc_setup$a = _sfc_main$a.setup;
+_sfc_main$a.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/GridHelper.vue");
-  return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
+  return _sfc_setup$a ? _sfc_setup$a(props, ctx) : void 0;
 };
-const __nuxt_component_2 = Object.assign(_sfc_main$9, { __name: "GridHelper" });
+const __nuxt_component_2 = Object.assign(_sfc_main$a, { __name: "GridHelper" });
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -6955,7 +6921,7 @@ _forEachName("x,y,z,top,right,bottom,left,width,height,fontSize,padding,margin,p
 gsap$3.registerPlugin(CSSPlugin);
 var gsapWithCSS = gsap$3.registerPlugin(CSSPlugin) || gsap$3;
 gsapWithCSS.core.Tween;
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "RotateDeviceOverlay",
   __ssrInlineRender: true,
   setup(__props) {
@@ -6972,13 +6938,13 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _sfc_setup$8 = _sfc_main$8.setup;
-_sfc_main$8.setup = (props, ctx) => {
+const _sfc_setup$9 = _sfc_main$9.setup;
+_sfc_main$9.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/RotateDeviceOverlay.vue");
-  return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
+  return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
-const __nuxt_component_3 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$8, [["__scopeId", "data-v-343badea"]]), { __name: "RotateDeviceOverlay" });
+const __nuxt_component_3 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$9, [["__scopeId", "data-v-343badea"]]), { __name: "RotateDeviceOverlay" });
 async function imageMeta(_ctx, url) {
   const meta = await _imageMeta(url).catch((err) => {
     console.error("Failed to get image meta for " + url, err + "");
@@ -7398,7 +7364,7 @@ const useImageProps = (props) => {
   });
   return { providerOptions, normalizedAttrs, imageModifiers };
 };
-const _sfc_main$7 = {
+const _sfc_main$8 = {
   __name: "NuxtImg",
   __ssrInlineRender: true,
   props: {
@@ -7501,14 +7467,14 @@ const _sfc_main$7 = {
     };
   }
 };
-const _sfc_setup$7 = _sfc_main$7.setup;
-_sfc_main$7.setup = (props, ctx) => {
+const _sfc_setup$8 = _sfc_main$8.setup;
+_sfc_main$8.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/image/dist/runtime/components/NuxtImg.vue");
-  return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
+  return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const __nuxt_component_1 = Object.assign(_sfc_main$7, { __name: "NuxtImg" });
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+const __nuxt_component_1 = Object.assign(_sfc_main$8, { __name: "NuxtImg" });
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "Preloader",
   __ssrInlineRender: true,
   setup(__props) {
@@ -7563,16 +7529,16 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$6 = _sfc_main$6.setup;
-_sfc_main$6.setup = (props, ctx) => {
+const _sfc_setup$7 = _sfc_main$7.setup;
+_sfc_main$7.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/Preloader.vue");
-  return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
+  return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
 };
-const __nuxt_component_4 = Object.assign(_sfc_main$6, { __name: "Preloader" });
+const __nuxt_component_4 = Object.assign(_sfc_main$7, { __name: "Preloader" });
 const layouts = {
-  custom: defineAsyncComponent(() => import('./custom-C5kWRR6E.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-BCnN3cgj.mjs').then((m) => m.default || m))
+  custom: defineAsyncComponent(() => import('./custom-CcMGwA8E.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-CN5KglQD.mjs').then((m) => m.default || m))
 };
 const routeRulesMatcher = _routeRulesMatcher;
 const LayoutLoader = defineComponent({
@@ -7809,7 +7775,7 @@ function normalizeSlot(slot, data) {
   const slotContent = slot(data);
   return slotContent.length === 1 ? h(slotContent[0]) : h(Fragment, void 0, slotContent);
 }
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   __name: "Menu",
   __ssrInlineRender: true,
   setup(__props) {
@@ -7965,13 +7931,13 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$5 = _sfc_main$5.setup;
-_sfc_main$5.setup = (props, ctx) => {
+const _sfc_setup$6 = _sfc_main$6.setup;
+_sfc_main$6.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/Menu.vue");
-  return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
+  return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
-const __nuxt_component_7 = Object.assign(_sfc_main$5, { __name: "Menu" });
+const __nuxt_component_7 = Object.assign(_sfc_main$6, { __name: "Menu" });
 const siteConfig = {
   name: "SU Yatçılık | İstanbul Boğazı'nda Özel Yat Kiralama",
   shortName: "SU Yatçılık",
@@ -10527,7 +10493,7 @@ const _SplitText = class _SplitText2 {
 };
 _SplitText.version = "3.14.2";
 let SplitText = _SplitText;
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "ContactModal",
   __ssrInlineRender: true,
   setup(__props) {
@@ -10816,15 +10782,15 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$4 = _sfc_main$4.setup;
-_sfc_main$4.setup = (props, ctx) => {
+const _sfc_setup$5 = _sfc_main$5.setup;
+_sfc_main$5.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/ContactModal.vue");
-  return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
+  return _sfc_setup$5 ? _sfc_setup$5(props, ctx) : void 0;
 };
-const __nuxt_component_8 = Object.assign(_sfc_main$4, { __name: "ContactModal" });
+const __nuxt_component_8 = Object.assign(_sfc_main$5, { __name: "ContactModal" });
 const phoneNumber = "905441014343";
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   __name: "FloatingWhatsApp",
   __ssrInlineRender: true,
   setup(__props) {
@@ -10874,13 +10840,71 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
   }
 });
+const _sfc_setup$4 = _sfc_main$4.setup;
+_sfc_main$4.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/FloatingWhatsApp.vue");
+  return _sfc_setup$4 ? _sfc_setup$4(props, ctx) : void 0;
+};
+const __nuxt_component_9 = Object.assign(_sfc_main$4, { __name: "FloatingWhatsApp" });
+const useSupabaseClient = () => {
+  return useNuxtApp().$supabase.client;
+};
+const _sfc_main$3 = /* @__PURE__ */ defineComponent({
+  __name: "PhoneVerificationModal",
+  __ssrInlineRender: true,
+  setup(__props) {
+    const isOpen = ref(false);
+    const phone = ref("");
+    const loading = ref(false);
+    const errorMsg = ref("");
+    const user = useSupabaseUser();
+    useSupabaseClient();
+    const router = useRouter$1();
+    const checkStatus = () => {
+      if (user.value) {
+        const hasPhone = user.value.user_metadata?.phone;
+        const skipped = sessionStorage.getItem("skipPhoneModal");
+        if (!hasPhone && !skipped) {
+          isOpen.value = true;
+        } else {
+          isOpen.value = false;
+        }
+      } else {
+        isOpen.value = false;
+      }
+    };
+    router.afterEach(() => {
+      setTimeout(checkStatus, 500);
+    });
+    return (_ctx, _push, _parent, _attrs) => {
+      if (isOpen.value) {
+        _push(`<div${ssrRenderAttrs(mergeProps({ class: "fixed inset-0 z-[9999] flex items-center justify-center p-4" }, _attrs))} data-v-de22bb38><div class="absolute inset-0 bg-dark/30 backdrop-blur-md" data-v-de22bb38></div><div class="relative w-full max-w-[420px] bg-white rounded-[24px] shadow-2xl overflow-hidden animate-fade-in-up" data-v-de22bb38><div class="bg-[#112a46] text-white pt-10 pb-8 px-8 flex flex-col items-center text-center" data-v-de22bb38><div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center mb-5" data-v-de22bb38><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-v-de22bb38><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" data-v-de22bb38></path><circle cx="12" cy="7" r="4" data-v-de22bb38></circle></svg></div><h2 class="text-2xl font-bold mb-3 tracking-tight" data-v-de22bb38>Eksik Bilgiler</h2><p class="text-white/80 text-[15px] leading-relaxed" data-v-de22bb38> Hesabınızı tamamlamak ve rezervasyonlarınızı takip edebilmek için lütfen aşağıdaki bilgileri girin. </p></div><div class="p-8" data-v-de22bb38><div class="mb-6" data-v-de22bb38><label class="block text-[13px] font-semibold text-[#112a46] mb-2" data-v-de22bb38>Telefon Numarası <span class="text-red-500" data-v-de22bb38>*</span></label><div class="flex items-center border border-gray-200 rounded-lg overflow-hidden focus-within:border-[#112a46] focus-within:ring-1 focus-within:ring-[#112a46] transition-all" data-v-de22bb38><div class="bg-gray-50 px-3 py-3 border-r border-gray-200 flex items-center gap-2 select-none" data-v-de22bb38><span class="text-lg leading-none" data-v-de22bb38>🇹🇷</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400" data-v-de22bb38><path d="m6 9 6 6 6-6" data-v-de22bb38></path></svg><span class="text-[#112a46] font-medium" data-v-de22bb38>+90</span></div><input${ssrRenderAttr("value", phone.value)} type="tel" placeholder="501 234 56 78" class="flex-1 w-full px-4 py-3 outline-none text-[#112a46] placeholder-gray-400 bg-transparent text-[15px]" data-v-de22bb38></div>`);
+        if (errorMsg.value) {
+          _push(`<p class="text-red-500 text-xs mt-2" data-v-de22bb38>${ssrInterpolate(errorMsg.value)}</p>`);
+        } else {
+          _push(`<!---->`);
+        }
+        _push(`</div><button class="w-full bg-[#112a46] text-white font-medium py-[14px] rounded-lg hover:bg-[#0c1e33] transition-colors mb-3 flex items-center justify-center gap-2"${ssrIncludeBooleanAttr(loading.value) ? " disabled" : ""} data-v-de22bb38>`);
+        if (loading.value) {
+          _push(`<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" data-v-de22bb38><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" data-v-de22bb38></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" data-v-de22bb38></path></svg>`);
+        } else {
+          _push(`<!---->`);
+        }
+        _push(` ${ssrInterpolate(loading.value ? "Kaydediliyor..." : "Kaydet")}</button><button class="w-full text-[#64748b] font-medium py-2 hover:text-[#112a46] transition-colors text-[14px]" data-v-de22bb38> Şimdilik Atla </button></div></div></div>`);
+      } else {
+        _push(`<!---->`);
+      }
+    };
+  }
+});
 const _sfc_setup$3 = _sfc_main$3.setup;
 _sfc_main$3.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/FloatingWhatsApp.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/PhoneVerificationModal.vue");
   return _sfc_setup$3 ? _sfc_setup$3(props, ctx) : void 0;
 };
-const __nuxt_component_9 = Object.assign(_sfc_main$3, { __name: "FloatingWhatsApp" });
+const __nuxt_component_10 = /* @__PURE__ */ Object.assign(_export_sfc(_sfc_main$3, [["__scopeId", "data-v-de22bb38"]]), { __name: "PhoneVerificationModal" });
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "app",
   __ssrInlineRender: true,
@@ -11065,6 +11089,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         });
       },
       onAfterEnter: (el) => {
+        gsapWithCSS.set(el, { clearProps: "opacity" });
         store.endTransition();
         setTimeout(() => {
           ScrollTrigger.refresh();
@@ -11072,6 +11097,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       },
       onEnterCancelled: (el) => {
         gsapWithCSS.killTweensOf(el);
+        gsapWithCSS.set(el, { opacity: 1, clearProps: "opacity" });
         store.endTransition();
       }
     };
@@ -11086,6 +11112,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       const _component_Menu = __nuxt_component_7;
       const _component_ContactModal = __nuxt_component_8;
       const _component_FloatingWhatsApp = __nuxt_component_9;
+      const _component_PhoneVerificationModal = __nuxt_component_10;
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "min-h-screen app-wrapper bg-light text-dark selection:bg-dark selection:text-light" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_VitePwaManifest, null, null, _parent));
       _push(ssrRenderComponent(_component_NuxtRouteAnnouncer, null, null, _parent));
@@ -11095,10 +11122,16 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_NuxtLayout, null, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_NuxtPage, { transition: pageTransition }, null, _parent2, _scopeId));
+            _push2(ssrRenderComponent(_component_NuxtPage, {
+              "page-key": unref(route).fullPath,
+              transition: pageTransition
+            }, null, _parent2, _scopeId));
           } else {
             return [
-              createVNode(_component_NuxtPage, { transition: pageTransition })
+              createVNode(_component_NuxtPage, {
+                "page-key": unref(route).fullPath,
+                transition: pageTransition
+              }, null, 8, ["page-key"])
             ];
           }
         }),
@@ -11107,6 +11140,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_Menu, null, null, _parent));
       _push(ssrRenderComponent(_component_ContactModal, null, null, _parent));
       _push(ssrRenderComponent(_component_FloatingWhatsApp, null, null, _parent));
+      _push(ssrRenderComponent(_component_PhoneVerificationModal, null, null, _parent));
       _push(`</div>`);
     };
   }
@@ -11232,5 +11266,5 @@ let entry;
 }
 const entry_default = ((ssrContext) => entry(ssrContext));
 
-export { __nuxt_component_0$1 as _, useAsyncData as a, useSeoMeta as b, useSchemaOrg as c, useHead as d, entry_default as default, __nuxt_component_1 as e, useSupabaseUser as f, useRouter as g, _export_sfc as h, useNuxtApp as i, siteConfig as s, useRoute as u };
+export { __nuxt_component_0$1 as _, useSupabaseClient as a, useAsyncData as b, useSeoMeta as c, useSchemaOrg as d, entry_default as default, useHead as e, __nuxt_component_1 as f, useSupabaseUser as g, useRouter as h, _export_sfc as i, siteConfig as s, useRoute as u };
 //# sourceMappingURL=server.mjs.map
