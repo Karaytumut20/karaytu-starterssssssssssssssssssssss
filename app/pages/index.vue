@@ -214,7 +214,7 @@ const supabase = useSupabaseClient();
 const mainContainer = ref<HTMLElement | null>(null);
 
 const { data: homeData, pending } = await useAsyncData('home-all-data-lux', async () => {
-  if (import.meta.server) return { yachts: [], settings: [], experiences: [], reviews: [] };
+
   const [yRes, sRes, eRes, rRes] = await Promise.all([
     supabase.from('yachts').select('*').eq('is_active', true).order('created_at', { ascending: true }).limit(4),
     supabase.from('site_settings').select('*'),
