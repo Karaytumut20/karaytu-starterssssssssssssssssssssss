@@ -83,7 +83,7 @@
                   <svg class="w-3.5 h-3.5 text-[#1A7B8A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg> İkramlar
                 </span>
               </div>
-              <NuxtLink to="/rezervasyon" class="block w-full text-center py-3.5 bg-[#0C2340] text-white font-semibold text-[14px] rounded-xl hover:bg-[#1a3a5c] transition-colors">Bu Yatı Rezerve Et</NuxtLink>
+              <NuxtLink :to="`/rezervasyon?yacht_id=${yacht.id}`" class="block w-full text-center py-3.5 bg-[#0C2340] text-white font-semibold text-[14px] rounded-xl hover:bg-[#1a3a5c] transition-colors">Bu Yatı Rezerve Et</NuxtLink>
             </div>
           </div>
         </div>

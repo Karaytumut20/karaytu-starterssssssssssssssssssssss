@@ -64,7 +64,7 @@
                 </div>
                 <div class="flex gap-2">
                   <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="h-10 px-4 border border-[#E8E0D0] text-[#0C2340] text-[13px] font-medium rounded-lg flex items-center hover:bg-white transition-colors">İncele</NuxtLink>
-                  <NuxtLink to="/rezervasyon" class="h-10 px-4 bg-[#0C2340] text-white text-[13px] font-medium rounded-lg flex items-center hover:bg-[#1a3a5c] transition-colors">Kirala</NuxtLink>
+                  <NuxtLink :to="`/rezervasyon?yacht_id=${yacht.id}`" class="h-10 px-4 bg-[#0C2340] text-white text-[13px] font-medium rounded-lg flex items-center hover:bg-[#1a3a5c] transition-colors">Kirala</NuxtLink>
                 </div>
               </div>
             </div>

@@ -51,9 +51,9 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+        <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory hide-scrollbar">
           
-          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
+          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 md:shrink bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
             <div class="h-[180px] overflow-hidden">
                <img :src="exp.main_image || '/images/default.jpg'" :alt="exp.title" class="w-full h-full object-cover" />
             </div>
@@ -100,42 +100,49 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <NuxtLink v-for="yacht in yachts.slice(0,4)" :key="yacht.id" :to="`/yatlarimiz/${yacht.slug}`" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
+        <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory hide-scrollbar">
+          <div v-for="yacht in yachts.slice(0,4)" :key="yacht.id" class="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 md:shrink bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
             
             <!-- Image Area -->
-            <div class="relative h-[200px] overflow-hidden">
+            <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="relative h-[200px] overflow-hidden block">
                <img :src="yacht.main_image || '/images/img1.jpg'" :alt="yacht.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                <!-- Capacity Badge -->
                <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm text-[#0b213b] text-[13px] font-bold px-4 py-1.5 rounded-xl shadow-sm">
                  {{ yacht.capacity }} kişi
                </div>
-            </div>
+            </NuxtLink>
             
             <!-- Details Area -->
             <div class="p-6 flex flex-col flex-1">
-               <h3 class="text-[#0b213b] text-[18px] font-bold mb-3 font-sans">{{ yacht.name }}</h3>
-               <p class="text-gray-500 text-[13px] line-clamp-2 leading-relaxed mb-6 font-sans">
-                 {{ yacht.name }}, İstanbul Boğazı'nda lüks ve prestijin zirvesini temsil eder. {{ yacht.length }} metrelik bu görkemli yat, ...
-               </p>
+               <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="block">
+                 <h3 class="text-[#0b213b] text-[18px] font-bold mb-3 font-sans hover:text-[#1d4e89] transition-colors">{{ yacht.name }}</h3>
+                 <p class="text-gray-500 text-[13px] line-clamp-2 leading-relaxed mb-6 font-sans">
+                   {{ yacht.name }}, İstanbul Boğazı'nda lüks ve prestijin zirvesini temsil eder. {{ yacht.length }} metrelik bu görkemli yat, ...
+                 </p>
+               </NuxtLink>
                
                <div class="mt-auto">
                  <div class="w-full h-px bg-gray-100 mb-5"></div>
                  
-                 <div class="flex justify-between items-center">
+                 <div class="flex justify-between items-center mb-4">
                     <div>
                        <span class="text-[#0b213b] text-[22px] font-extrabold font-sans leading-none">{{ Number(yacht.price_hourly || 0).toLocaleString('tr-TR') }}</span>
                        <span class="text-gray-400 text-[12px] font-sans ml-1">TL / saat</span>
                     </div>
                     
-                    <div class="w-10 h-10 rounded-xl bg-[#f8fafc] border border-gray-100 flex items-center justify-center text-[#0b213b] group-hover:bg-[#1d4e89] group-hover:text-white transition-colors">
+                    <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="w-10 h-10 rounded-xl bg-[#f8fafc] border border-gray-100 flex items-center justify-center text-[#0b213b] hover:bg-[#1d4e89] hover:text-white transition-colors">
                       <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
-                    </div>
+                    </NuxtLink>
                  </div>
+
+                 <!-- Rezervasyon Butonu -->
+                 <NuxtLink :to="`/rezervasyon?yacht_id=${yacht.id}`" class="flex items-center justify-center w-full py-3 bg-[#f8fafc] border border-gray-100 text-[#0b213b] font-bold text-[13px] rounded-xl hover:bg-[#1d4e89] hover:text-white hover:border-[#1d4e89] transition-colors font-sans">
+                    Bu Yat ile Rezervasyon Yap
+                 </NuxtLink>
                </div>
             </div>
             
-          </NuxtLink>
+          </div>
         </div>
         
         <!-- Bottom Link -->
@@ -274,5 +281,13 @@ onMounted(() => {
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

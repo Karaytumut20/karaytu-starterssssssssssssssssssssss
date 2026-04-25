@@ -131,6 +131,7 @@
                       <span class="text-[15px] font-bold text-[#0b213b]">{{ duration }}</span>
                       <button type="button" @click="!hasLockId && duration < 168 && duration++" :disabled="hasLockId" class="w-10 h-10 rounded-lg flex items-center justify-center text-gray-400 hover:text-[#0b213b] hover:bg-white transition-colors disabled:opacity-30 shadow-sm"><svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
                    </div>
+                   <p class="text-[10.5px] text-gray-400 mt-2 flex items-center gap-1.5"><svg class="w-3.5 h-3.5 text-[#1d4e89]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Minimum kiralama süresi 2 saattir.</p>
                 </div>
               </div>
 
@@ -390,6 +391,12 @@
               </div>
 
 
+
+              <!-- Minimum Rental Info Box -->
+              <div class="bg-[#f0f4f8] border border-[#b9d3e8] rounded-[12px] p-3.5 flex items-start gap-3 mb-5">
+                 <svg class="w-4 h-4 text-[#1d4e89] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                 <p class="text-[12px] text-[#0b213b] leading-relaxed font-medium">Yat kiralama işlemlerinde minimum süre <strong class="font-bold">2 saat</strong> olarak belirlenmiştir.</p>
+              </div>
 
               <!-- Terms Checkbox -->
               <div @click="acceptedTerms = !acceptedTerms" class="border border-gray-200 rounded-[16px] p-4 flex items-center gap-3 cursor-pointer mb-6 hover:bg-gray-50 transition-colors">
