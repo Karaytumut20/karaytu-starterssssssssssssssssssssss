@@ -312,7 +312,7 @@
         </div>
 
         <!-- RIGHT COLUMN: Rezervasyon Özeti -->
-        <div class="lg:col-span-4 h-full relative">
+        <div class="lg:col-span-4 relative">
            <div class="sticky top-[120px] z-20 w-full pb-10">
               <div class="border border-gray-200 bg-white rounded-[24px] overflow-hidden flex flex-col shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
               <!-- Summary Header -->
