@@ -51,9 +51,9 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+        <div class="mobile-slider md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 text-left">
           
-          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
+          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="mobile-slider-item bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
             <div class="h-[180px] overflow-hidden">
                <img :src="exp.main_image || '/images/default.jpg'" :alt="exp.title" class="w-full h-full object-cover" />
             </div>
@@ -100,8 +100,8 @@
         </div>
 
         <!-- Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div v-for="yacht in yachts.slice(0,4)" :key="yacht.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
+        <div class="mobile-slider md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div v-for="yacht in yachts.slice(0,4)" :key="yacht.id" class="mobile-slider-item bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
             
             <!-- Image Area -->
             <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="relative h-[200px] overflow-hidden block">
@@ -281,5 +281,42 @@ onMounted(() => {
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+@media (max-width: 767px) {
+  .mobile-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 24px;
+    padding-bottom: 32px;
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .mobile-slider::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .mobile-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .mobile-slider-item {
+    width: 82vw;
+    max-width: 340px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+  
+  .mobile-slider::after {
+    content: '';
+    width: 24px;
+    flex-shrink: 0;
+    display: block;
+  }
 }
 </style>
