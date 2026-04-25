@@ -91,12 +91,10 @@
       <div class="max-w-[1300px] mx-auto px-6">
         
         <!-- Header -->
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
-            <h4 class="text-[#1d4e89] text-[13px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">FİLOMUZ</h4>
-            <h2 class="text-[#0b213b] text-4xl md:text-5xl font-extrabold font-sans tracking-tight">Yatlarımız</h2>
-          </div>
-          <p class="text-gray-500 text-[15px] font-sans mt-4 md:mt-0">Kişi sayısı ve tur planınıza göre en uygun yatı seçin.</p>
+        <div class="text-center mb-14">
+          <h4 class="text-[#1d4e89] text-[13px] font-bold uppercase tracking-[0.2em] mb-3 font-sans">FİLOMUZ</h4>
+          <h2 class="text-[#0b213b] text-4xl md:text-5xl font-extrabold mb-4 font-sans tracking-tight">Yatlarımız</h2>
+          <p class="text-gray-500 text-[15px] font-sans">Kişi sayısı ve tur planınıza göre en uygun yatı seçin.</p>
         </div>
 
         <!-- Grid -->

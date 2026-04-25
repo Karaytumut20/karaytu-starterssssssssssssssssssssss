@@ -808,7 +808,7 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-25T19:03:37Z"
+          "lastmod": "2026-04-25T19:28:35Z"
         },
         "include": [],
         "exclude": [
@@ -6531,7 +6531,7 @@ const sources$1 = [
             },
             {
                 "loc": "/hesabim",
-                "lastmod": "2026-04-25T18:55:57.983Z"
+                "lastmod": "2026-04-25T19:07:39.927Z"
             },
             {
                 "loc": "/iletisim",
@@ -6563,7 +6563,7 @@ const sources$1 = [
             },
             {
                 "loc": "/",
-                "lastmod": "2026-04-25T17:00:36.916Z"
+                "lastmod": "2026-04-25T19:26:09.877Z"
             },
             {
                 "loc": "/contact"
