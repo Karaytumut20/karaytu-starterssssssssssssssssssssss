@@ -312,9 +312,8 @@
         </div>
 
         <!-- RIGHT COLUMN: Rezervasyon Özeti -->
-        <div class="lg:col-span-4 relative">
-           <div class="sticky top-[120px] z-20 w-full pb-10">
-              <div class="border border-gray-200 bg-white rounded-[24px] overflow-hidden flex flex-col shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
+        <div class="lg:col-span-4 relative sticky top-[120px] self-start z-20 w-full pb-10">
+           <div class="border border-gray-200 bg-white rounded-[24px] overflow-hidden flex flex-col shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
               <!-- Summary Header -->
               <div class="flex items-center gap-3 mb-6">
                  <div class="w-10 h-10 rounded-full bg-[#f4f7fe] flex items-center justify-center text-[#1d4e89]">
@@ -414,7 +413,6 @@
                  <span>{{ submitLoading ? 'İşleniyor...' : 'Öde ve Rezervasyonu Tamamla' }}</span>
               </button>
               <p v-if="!acceptedTerms || !selectedYacht || (!hasLockId && !selectedTime)" class="text-center text-[11px] text-gray-400 mt-3">Devam etmek için {{ (!acceptedTerms ? 1 : 0) + (!selectedYacht ? 1 : 0) + ((!hasLockId && !selectedTime) ? 1 : 0) }} alan doldurulmalı</p>
-           </div>
            </div>
         </div>
       </div>
