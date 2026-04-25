@@ -171,9 +171,9 @@
             <div class="border border-gray-200 rounded-[20px] p-6 mb-5">
               <!-- Custom Calendar Header -->
               <div class="flex justify-between items-center mb-6">
-                <button class="text-gray-400 hover:text-[#0b213b] transition-colors"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
-                <span class="font-bold text-[#0b213b] text-[15px]">Nisan 2026</span>
-                <button class="text-gray-400 hover:text-[#0b213b] transition-colors"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+                <button type="button" @click="prevMonth" class="text-gray-400 hover:text-[#0b213b] transition-colors"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+                <span class="font-bold text-[#0b213b] text-[15px] capitalize">{{ currentMonthName }}</span>
+                <button type="button" @click="nextMonth" class="text-gray-400 hover:text-[#0b213b] transition-colors"><svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
               </div>
 
               <!-- Days Header -->
@@ -189,21 +189,11 @@
 
               <!-- Days Grid -->
               <div class="grid grid-cols-7 gap-y-3 gap-x-2 text-center text-[13px] font-semibold">
-                <div class="text-gray-300 py-1.5">30</div><div class="text-gray-300 py-1.5">31</div>
-                <div v-for="d in 22" :key="'d1-'+d" class="text-gray-500 py-1.5 cursor-pointer hover:bg-gray-100 rounded-lg" @click="selectedDate=`2026-04-${String(d).padStart(2, '0')}`">{{ d }}</div>
-                
-                <!-- Match image: 23 selected, 30 dark blue -->
-                <div class="bg-[#f0f4f8] text-[#1d4e89] py-1.5 cursor-pointer rounded-lg relative" @click="selectedDate='2026-04-23'">
-                  23
-                  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#1d4e89] rounded-full"></div>
+                <div v-for="(dayObj, index) in calendarDays" :key="index">
+                  <div v-if="!dayObj.isCurrentMonth" class="text-gray-300 py-1.5">{{ dayObj.day }}</div>
+                  <div v-else-if="selectedDate === dayObj.dateStr" class="bg-[#1d4e89] text-white py-1.5 cursor-pointer rounded-lg font-bold shadow-md" @click="selectedDate = dayObj.dateStr">{{ dayObj.day }}</div>
+                  <div v-else class="text-gray-500 py-1.5 cursor-pointer hover:bg-gray-100 rounded-lg" @click="selectedDate = dayObj.dateStr">{{ dayObj.day }}</div>
                 </div>
-                <div v-for="d in 6" :key="'d2-'+d" class="text-gray-500 py-1.5 cursor-pointer hover:bg-gray-100 rounded-lg" @click="selectedDate=`2026-04-${23+d}`">{{ 23+d }}</div>
-                
-                <div class="bg-[#1d4e89] text-white py-1.5 cursor-pointer rounded-lg font-bold shadow-md" @click="selectedDate='2026-04-30'">30</div>
-                
-                <div class="text-gray-300 py-1.5">1</div>
-                <div class="text-gray-300 py-1.5">2</div>
-                <div class="text-gray-300 py-1.5">3</div>
               </div>
             </div>
 
@@ -212,7 +202,7 @@
                <div class="flex items-center gap-2 mb-5">
                   <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                   <span class="text-[13px] font-bold text-[#0b213b]">Tur başlangıç saati seçin</span>
-                  <span class="text-[12px] text-gray-400 ml-1">30 Nisan 2026, Perşembe</span>
+                  <span class="text-[12px] text-gray-400 ml-1">{{ selectedDateStrFormatted }}</span>
                </div>
 
                <div class="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-7 gap-3 mb-6">
@@ -452,8 +442,49 @@ const tourType = ref((route.query.tourType as string) || "Boğaz Turu");
 const pickupPoint = ref("Arnavutköy");
 const dropoffPoint = ref("Arnavutköy");
 
-const selectedDate = ref<string | null>((route.query.date as string | undefined) || '2026-04-30');
+const currentDate = ref(new Date());
+const selectedDate = ref<string | null>((route.query.date as string | undefined) || new Date().toISOString().split('T')[0]);
 const selectedTime = ref((route.query.time as string | undefined) ? String((route.query.time as string | undefined)) : '10:00');
+
+const currentMonthName = computed(() => {
+  return currentDate.value.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' });
+});
+
+const prevMonth = () => {
+  currentDate.value = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth() - 1, 1);
+};
+const nextMonth = () => {
+  currentDate.value = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth() + 1, 1);
+};
+
+const calendarDays = computed(() => {
+  const year = currentDate.value.getFullYear();
+  const month = currentDate.value.getMonth();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrevMonth = new Date(year, month, 0).getDate();
+  
+  const startingDay = firstDay === 0 ? 6 : firstDay - 1; 
+  
+  const days = [];
+  for (let i = 0; i < startingDay; i++) {
+    days.push({ day: daysInPrevMonth - startingDay + i + 1, isCurrentMonth: false, dateStr: '' });
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+    days.push({ day: i, isCurrentMonth: true, dateStr });
+  }
+  const remaining = Math.ceil(days.length / 7) * 7 - days.length;
+  for (let i = 1; i <= remaining; i++) {
+    days.push({ day: i, isCurrentMonth: false, dateStr: '' });
+  }
+  return days;
+});
+
+const selectedDateStrFormatted = computed(() => {
+  if (!selectedDate.value) return '';
+  return new Date(selectedDate.value).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
+});
 
 const lockId = route.query.lock_id ? String(route.query.lock_id) : null;
 const hasLockId = computed(() => !!lockId);
@@ -565,7 +596,7 @@ const isSlotSelected = (tTime: string) => {
   
   const slotStartMs = new Date(`${selectedDate.value}T${tTime}:00`).getTime();
   
-  return slotStartMs >= reqStartMs && slotStartMs < reqEndMs;
+  return slotStartMs >= reqStartMs && slotStartMs <= reqEndMs;
 };
 
 const handleTimeSelection = (tTime: string) => {
