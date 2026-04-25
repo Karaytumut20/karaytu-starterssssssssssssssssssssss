@@ -112,7 +112,6 @@
                  <select v-model="tourType" class="w-full bg-[#f8fafc] border border-gray-200 text-[#0b213b] font-semibold text-[14px] rounded-[14px] py-4 px-5 outline-none focus:border-[#1d4e89] transition-colors appearance-none relative">
                     <option value="Saatlik Kiralama">Saatlik Kiralama</option>
                     <option value="Tam Gün Adalar Turu (8 saat)">Tam Gün Adalar Turu (8 saat)</option>
-                    <option value="Tam Gün Boğaz Turu (8 saat)">Tam Gün Boğaz Turu (8 saat)</option>
                  </select>
               </div>
 
@@ -437,7 +436,7 @@ const route = useRoute();
 const selectedYacht = ref<string | number | null>(route.query.yacht_id ? String(route.query.yacht_id) : null);
 const guestCount = ref(2);
 const duration = ref((route.query.duration as string | undefined) ? Number((route.query.duration as string | undefined)) : 2);
-const tourType = ref((route.query.tourType as string) || "Boğaz Turu");
+const tourType = ref((route.query.tourType as string) || "Saatlik Kiralama");
 
 const pickupPoint = ref("Arnavutköy");
 const dropoffPoint = ref("Arnavutköy");
