@@ -21,7 +21,6 @@ export const GridHelper: typeof import("../app/components/GridHelper.vue")['defa
 export const Menu: typeof import("../app/components/Menu.vue")['default']
 export const Navbar: typeof import("../app/components/Navbar.vue")['default']
 export const PhoneVerificationModal: typeof import("../app/components/PhoneVerificationModal.vue")['default']
-export const Preloader: typeof import("../app/components/Preloader.vue")['default']
 export const RotateDeviceOverlay: typeof import("../app/components/RotateDeviceOverlay.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
@@ -85,7 +84,6 @@ export const LazyGridHelper: LazyComponent<typeof import("../app/components/Grid
 export const LazyMenu: LazyComponent<typeof import("../app/components/Menu.vue")['default']>
 export const LazyNavbar: LazyComponent<typeof import("../app/components/Navbar.vue")['default']>
 export const LazyPhoneVerificationModal: LazyComponent<typeof import("../app/components/PhoneVerificationModal.vue")['default']>
-export const LazyPreloader: LazyComponent<typeof import("../app/components/Preloader.vue")['default']>
 export const LazyRotateDeviceOverlay: LazyComponent<typeof import("../app/components/RotateDeviceOverlay.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>

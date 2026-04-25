@@ -6,7 +6,7 @@ import type Lenis from "lenis";
 export const useAppStore = defineStore("app", {
   state: () => ({
     isBot: false,
-    isPreloaderDone: false,
+    isPreloaderDone: true,
     isTransitioning: false,
     isContactOpen: false, // Contact modal durumu
     isMenuOpen: false, // Menü durumu

@@ -9,8 +9,6 @@
 
     <RotateDeviceOverlay />
 
-    <Preloader />
-
     <NuxtLayout>
       <NuxtPage :page-key="route.fullPath" :transition="pageTransition" />
     </NuxtLayout>
@@ -253,22 +251,7 @@ onMounted(() => {
     if (store.isBot) return;
 
     store.isContactOpen = false;
-
-    if (store.isPreloaderDone) {
-      store.openContact();
-    } else {
-      const unwatch = watch(
-        () => store.isPreloaderDone,
-        (isDone) => {
-          if (isDone) {
-            setTimeout(() => {
-              store.openContact();
-            }, 100);
-            unwatch();
-          }
-        },
-      );
-    }
+    store.openContact();
   }
 });
 
