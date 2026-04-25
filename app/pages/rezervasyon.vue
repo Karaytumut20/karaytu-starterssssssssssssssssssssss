@@ -20,16 +20,22 @@
         <div class="lg:col-span-8 space-y-6">
            
           <!-- STEP 1: Yat Seçin -->
-          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-12 h-12 shrink-0 rounded-full bg-[#e8f0fe] flex items-center justify-center text-[#1a73e8]">
-                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1z M13 8h6a1 1 0 011 1v7a1 1 0 01-1 1h-6"/></svg>
+          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div @click="activeStep = activeStep === 1 ? null : 1" class="flex items-center justify-between p-6 md:p-8 cursor-pointer hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 shrink-0 rounded-full bg-[#e8f0fe] flex items-center justify-center text-[#1a73e8]">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1z M13 8h6a1 1 0 011 1v7a1 1 0 01-1 1h-6"/></svg>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-[#0b213b] flex items-center gap-2">Yat Seçin <span class="text-red-500">*</span></h2>
+                  <p class="text-[13px] text-gray-500 mt-1">Deneyiminiz için mükemmel yatı seçin</p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-xl font-bold text-[#0b213b] flex items-center gap-2">Yat Seçin <span class="text-red-500">*</span></h2>
-                <p class="text-[13px] text-gray-500 mt-1">Deneyiminiz için mükemmel yatı seçin</p>
-              </div>
+              <svg :class="['w-6 h-6 text-gray-400 transition-transform duration-300', activeStep === 1 ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
+
+            <!-- Content (Collapsible) -->
+            <div v-show="activeStep === 1" class="px-6 md:px-8 pb-6 md:pb-8 pt-0">
 
             <!-- Lock Badge -->
             <div v-if="hasLockId" class="mb-6 bg-red-50 border border-red-100 rounded-2xl p-4 flex items-center gap-4">
@@ -92,19 +98,24 @@
                 </div>
               </div>
             </div>
+            </div>
           </div>
 
           <!-- STEP 2: Tur Detayları -->
-          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-12 h-12 shrink-0 rounded-full bg-[#f4f7fe] flex items-center justify-center text-[#1d4e89]">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div @click="activeStep = activeStep === 2 ? null : 2" class="flex items-center justify-between p-6 md:p-8 cursor-pointer hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 shrink-0 rounded-full bg-[#f4f7fe] flex items-center justify-center text-[#1d4e89]">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-[#0b213b]">Tur Detayları</h2>
+                  <p class="text-[13px] text-gray-500 mt-1">Paket, misafir sayısı, süre ve lokasyonu belirleyin</p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-xl font-bold text-[#0b213b]">Tur Detayları</h2>
-                <p class="text-[13px] text-gray-500 mt-1">Paket, misafir sayısı, süre ve lokasyonu belirleyin</p>
-              </div>
+              <svg :class="['w-6 h-6 text-gray-400 transition-transform duration-300', activeStep === 2 ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
+            <div v-show="activeStep === 2" class="px-6 md:px-8 pb-6 md:pb-8 pt-0">
 
             <div class="space-y-5">
               <div>
@@ -154,19 +165,24 @@
                 </div>
               </div>
             </div>
+            </div>
           </div>
 
           <!-- STEP 3: Tarih ve Saat -->
-          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-12 h-12 shrink-0 rounded-full bg-[#f3e8ff] flex items-center justify-center text-[#9333ea]">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div @click="activeStep = activeStep === 3 ? null : 3" class="flex items-center justify-between p-6 md:p-8 cursor-pointer hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 shrink-0 rounded-full bg-[#f3e8ff] flex items-center justify-center text-[#9333ea]">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-[#0b213b]">Tarih ve Saat</h2>
+                  <p class="text-[13px] text-gray-500 mt-1">Turunuz için tarih ve saat seçin</p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-xl font-bold text-[#0b213b]">Tarih ve Saat</h2>
-                <p class="text-[13px] text-gray-500 mt-1">Turunuz için tarih ve saat seçin</p>
-              </div>
+              <svg :class="['w-6 h-6 text-gray-400 transition-transform duration-300', activeStep === 3 ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
+            <div v-show="activeStep === 3" class="px-6 md:px-8 pb-6 md:pb-8 pt-0">
 
             <div class="border border-gray-200 rounded-[20px] p-6 mb-5">
               <!-- Custom Calendar Header -->
@@ -230,19 +246,24 @@
                  <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-gray-100 border border-gray-200 rounded-sm"></div> Hazırlık</div>
                </div>
             </div>
+            </div>
           </div>
 
           <!-- STEP 4: Premium Ekstralar (White background) -->
-          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-12 h-12 shrink-0 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div @click="activeStep = activeStep === 4 ? null : 4" class="flex items-center justify-between p-6 md:p-8 cursor-pointer hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 shrink-0 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-[#0b213b] flex items-center gap-2">Premium Ekstralar <span class="bg-amber-100 text-amber-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">VIP</span></h2>
+                  <p class="text-[13px] text-gray-500 mt-1">Lüks deneyiminizi bir üst seviyeye taşıyın</p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-xl font-bold text-[#0b213b] flex items-center gap-2">Premium Ekstralar <span class="bg-amber-100 text-amber-700 text-[10px] px-2 py-0.5 rounded-md font-bold uppercase tracking-widest">VIP</span></h2>
-                <p class="text-[13px] text-gray-500 mt-1">Lüks deneyiminizi bir üst seviyeye taşıyın</p>
-              </div>
+              <svg :class="['w-6 h-6 text-gray-400 transition-transform duration-300', activeStep === 4 ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
+            <div v-show="activeStep === 4" class="px-6 md:px-8 pb-6 md:pb-8 pt-0">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                <div v-for="(item, idx) in extraServices" :key="idx" 
@@ -271,19 +292,24 @@
                  </div>
                </div>
             </div>
+            </div>
           </div>
 
           <!-- STEP 5: Rezervasyon Bilgileri -->
-          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] p-6 md:p-8">
-            <div class="flex items-center gap-4 mb-6">
-              <div class="w-12 h-12 shrink-0 rounded-full bg-[#e8f0fe] flex items-center justify-center text-[#1a73e8]">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          <div class="bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_25px_rgba(0,0,0,0.03)] overflow-hidden">
+            <div @click="activeStep = activeStep === 5 ? null : 5" class="flex items-center justify-between p-6 md:p-8 cursor-pointer hover:bg-gray-50 transition-colors">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 shrink-0 rounded-full bg-[#e8f0fe] flex items-center justify-center text-[#1a73e8]">
+                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-[#0b213b]">Rezervasyon Bilgileri</h2>
+                  <p class="text-[13px] text-gray-500 mt-1">Rezervasyon için iletişim bilgilerinizi girin</p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-xl font-bold text-[#0b213b]">Rezervasyon Bilgileri</h2>
-                <p class="text-[13px] text-gray-500 mt-1">Rezervasyon için iletişim bilgilerinizi girin</p>
-              </div>
+              <svg :class="['w-6 h-6 text-gray-400 transition-transform duration-300', activeStep === 5 ? 'rotate-180' : '']" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </div>
+            <div v-show="activeStep === 5" class="px-6 md:px-8 pb-6 md:pb-8 pt-0">
 
 
 
@@ -307,6 +333,7 @@
             <div class="border border-gray-200 rounded-[20px] p-6">
                <label class="block text-[12px] font-bold text-[#0b213b] mb-2">Notlar (opsiyonel)</label>
                <textarea v-model="formNotes" class="w-full h-24 bg-[#f4f7f6] rounded-[12px] p-4 text-[14px] font-semibold text-[#0b213b] outline-none border border-transparent focus:border-[#1d4e89] transition-colors resize-none"></textarea>
+            </div>
             </div>
           </div>
 
@@ -438,6 +465,7 @@ const user = useSupabaseUser();
 const supabase = useSupabaseClient();
 const route = useRoute();
 
+const activeStep = ref<number | null>(route.query.yacht_id ? 2 : 1);
 const selectedYacht = ref<string | number | null>(route.query.yacht_id ? String(route.query.yacht_id) : null);
 const guestCount = ref(2);
 const duration = ref((route.query.duration as string | undefined) ? Number((route.query.duration as string | undefined)) : 2);
