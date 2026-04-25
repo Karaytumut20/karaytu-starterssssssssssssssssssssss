@@ -808,7 +808,7 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-25T13:47:29Z"
+          "lastmod": "2026-04-25T19:03:37Z"
         },
         "include": [],
         "exclude": [
@@ -6531,7 +6531,7 @@ const sources$1 = [
             },
             {
                 "loc": "/hesabim",
-                "lastmod": "2026-04-22T13:49:07.485Z"
+                "lastmod": "2026-04-25T18:55:57.983Z"
             },
             {
                 "loc": "/iletisim",
@@ -6547,7 +6547,7 @@ const sources$1 = [
             },
             {
                 "loc": "/rezervasyon",
-                "lastmod": "2026-04-25T00:52:06.648Z"
+                "lastmod": "2026-04-25T17:30:48.501Z"
             },
             {
                 "loc": "/sikca-sorulanlar",
@@ -6555,15 +6555,15 @@ const sources$1 = [
             },
             {
                 "loc": "/yat-kiralama-fiyatlari",
-                "lastmod": "2026-04-24T08:38:53.904Z"
+                "lastmod": "2026-04-25T13:51:18.548Z"
             },
             {
                 "loc": "/yatlarimiz",
-                "lastmod": "2026-04-22T23:02:45.711Z"
+                "lastmod": "2026-04-25T13:51:20.554Z"
             },
             {
                 "loc": "/",
-                "lastmod": "2026-04-25T00:44:54.534Z"
+                "lastmod": "2026-04-25T17:00:36.916Z"
             },
             {
                 "loc": "/contact"
