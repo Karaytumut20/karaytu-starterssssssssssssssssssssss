@@ -3,13 +3,13 @@
     <div class="max-w-6xl mx-auto px-6">
       
       <!-- Başlık -->
-      <div class="mb-8 flex items-center justify-between">
+      <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 class="text-3xl font-bold text-[#112135]">Hesabım</h1>
-          <p class="text-[#64748b] mt-2">Rezervasyonlarınızı, ödemelerinizi ve profilinizi buradan yönetebilirsiniz.</p>
+          <p class="text-[#64748b] mt-2 text-sm md:text-base">Rezervasyonlarınızı, ödemelerinizi ve profilinizi buradan yönetebilirsiniz.</p>
         </div>
-        <button @click="logout" class="bg-red-50 text-red-600 font-bold px-4 py-2 rounded-lg hover:bg-red-100 transition-colors flex items-center gap-2 text-sm">
-           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+        <button @click="logout" class="bg-red-50 text-red-600 font-bold px-4 py-2.5 rounded-lg hover:bg-red-100 transition-colors flex items-center justify-center gap-2 text-sm w-full sm:w-auto">
+           <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
            Çıkış Yap
         </button>
       </div>
@@ -19,21 +19,21 @@
         <!-- Sol Menü -->
         <div class="md:col-span-3">
           <div class="bg-white border border-[#e2e8f0] rounded-xl shadow-sm overflow-hidden sticky top-24">
-            <nav class="flex flex-col">
-              <button @click="activeTab = 'panel'" :class="['px-6 py-4 text-left font-bold text-sm transition-colors border-b border-[#e2e8f0] flex items-center gap-3', activeTab === 'panel' ? 'bg-[#f0f9ff] text-[#215d8f] border-l-4 border-l-[#215d8f]' : 'text-[#64748b] hover:bg-gray-50 border-l-4 border-l-transparent']">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            <nav class="flex flex-row md:flex-col overflow-x-auto hide-scrollbar snap-x">
+              <button @click="activeTab = 'panel'" :class="['snap-start shrink-0 whitespace-nowrap px-4 md:px-6 py-4 text-left font-bold text-sm transition-colors border-b-2 md:border-b border-[#e2e8f0] flex items-center gap-2 md:gap-3', activeTab === 'panel' ? 'bg-[#f0f9ff] text-[#215d8f] border-b-[#215d8f] md:border-l-4 md:border-l-[#215d8f] md:border-b-[#e2e8f0]' : 'text-[#64748b] hover:bg-gray-50 border-b-transparent md:border-l-4 md:border-l-transparent']">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                 Hesap Özeti
               </button>
-              <button @click="activeTab = 'orders'" :class="['px-6 py-4 text-left font-bold text-sm transition-colors border-b border-[#e2e8f0] flex items-center gap-3', activeTab === 'orders' ? 'bg-[#f0f9ff] text-[#215d8f] border-l-4 border-l-[#215d8f]' : 'text-[#64748b] hover:bg-gray-50 border-l-4 border-l-transparent']">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <button @click="activeTab = 'orders'" :class="['snap-start shrink-0 whitespace-nowrap px-4 md:px-6 py-4 text-left font-bold text-sm transition-colors border-b-2 md:border-b border-[#e2e8f0] flex items-center gap-2 md:gap-3', activeTab === 'orders' ? 'bg-[#f0f9ff] text-[#215d8f] border-b-[#215d8f] md:border-l-4 md:border-l-[#215d8f] md:border-b-[#e2e8f0]' : 'text-[#64748b] hover:bg-gray-50 border-b-transparent md:border-l-4 md:border-l-transparent']">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                 Rezervasyonlarım
               </button>
-              <button @click="activeTab = 'payments'" :class="['px-6 py-4 text-left font-bold text-sm transition-colors border-b border-[#e2e8f0] flex items-center gap-3', activeTab === 'payments' ? 'bg-[#f0f9ff] text-[#215d8f] border-l-4 border-l-[#215d8f]' : 'text-[#64748b] hover:bg-gray-50 border-l-4 border-l-transparent']">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+              <button @click="activeTab = 'payments'" :class="['snap-start shrink-0 whitespace-nowrap px-4 md:px-6 py-4 text-left font-bold text-sm transition-colors border-b-2 md:border-b border-[#e2e8f0] flex items-center gap-2 md:gap-3', activeTab === 'payments' ? 'bg-[#f0f9ff] text-[#215d8f] border-b-[#215d8f] md:border-l-4 md:border-l-[#215d8f] md:border-b-[#e2e8f0]' : 'text-[#64748b] hover:bg-gray-50 border-b-transparent md:border-l-4 md:border-l-transparent']">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
                 Ödeme Geçmişi
               </button>
-              <button @click="activeTab = 'profile'" :class="['px-6 py-4 text-left font-bold text-sm transition-colors flex items-center gap-3', activeTab === 'profile' ? 'bg-[#f0f9ff] text-[#215d8f] border-l-4 border-l-[#215d8f]' : 'text-[#64748b] hover:bg-gray-50 border-l-4 border-l-transparent']">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+              <button @click="activeTab = 'profile'" :class="['snap-start shrink-0 whitespace-nowrap px-4 md:px-6 py-4 text-left font-bold text-sm transition-colors border-b-2 border-transparent md:border-b-0 flex items-center gap-2 md:gap-3', activeTab === 'profile' ? 'bg-[#f0f9ff] text-[#215d8f] border-b-[#215d8f] md:border-l-4 md:border-l-[#215d8f]' : 'text-[#64748b] hover:bg-gray-50 md:border-l-4 md:border-l-transparent']">
+                <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                 Profilim
               </button>
             </nav>
@@ -45,13 +45,13 @@
           
           <!-- HESAP ÖZETİ -->
           <div v-if="activeTab === 'panel'" class="space-y-6">
-             <div class="bg-white border border-[#e2e8f0] rounded-xl p-6 shadow-sm flex items-center gap-4">
-                <div class="w-16 h-16 rounded-full bg-[#f0f9ff] text-[#215d8f] flex items-center justify-center font-bold text-2xl uppercase">
+             <div class="bg-white border border-[#e2e8f0] rounded-xl p-5 md:p-6 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                <div class="w-16 h-16 shrink-0 rounded-full bg-[#f0f9ff] text-[#215d8f] flex items-center justify-center font-bold text-2xl uppercase">
                    {{ profileForm.fullName.charAt(0) || user?.email?.charAt(0) || 'U' }}
                 </div>
                 <div>
-                   <h2 class="text-xl font-bold text-[#112135]">Hoş Geldiniz, {{ profileForm.fullName || 'Değerli Misafirimiz' }}</h2>
-                   <p class="text-[#64748b] text-sm">{{ user?.email }}</p>
+                   <h2 class="text-lg md:text-xl font-bold text-[#112135]">Hoş Geldiniz, {{ profileForm.fullName || 'Değerli Misafirimiz' }}</h2>
+                   <p class="text-[#64748b] text-sm mt-1">{{ user?.email }}</p>
                 </div>
              </div>
 
@@ -149,7 +149,7 @@
                 </div>
 
                 <div v-else class="overflow-x-auto">
-                   <table class="w-full text-left text-sm">
+                   <table class="w-full text-left text-sm min-w-[600px]">
                       <thead class="bg-[#f8fafc] text-[#64748b] uppercase text-xs font-bold border-y border-[#e2e8f0]">
                          <tr>
                             <th class="px-4 py-3">Rez. Kodu</th>
@@ -245,7 +245,7 @@
                   </div>
                </div>
                
-               <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 mb-6 grid grid-cols-2 gap-y-4 gap-x-2">
+               <div class="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-4 mb-6 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2">
                   <div>
                      <p class="text-xs font-bold text-[#64748b] mb-1">Yat Adı</p>
                      <p class="text-sm font-bold text-[#112135]">{{ selectedRes.yacht_id?.name || '-' }}</p>
@@ -463,3 +463,14 @@ watch(activeTab, (newTab) => {
 });
 
 </script>
+
+<style scoped>
+/* Hidden scrollbar utilities */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style>
