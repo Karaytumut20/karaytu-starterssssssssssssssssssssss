@@ -51,9 +51,9 @@
         </div>
 
         <!-- Grid -->
-        <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 text-left pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory hide-scrollbar">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
           
-          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 md:shrink bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
+          <div v-for="exp in experiences.slice(0,4)" :key="exp.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1">
             <div class="h-[180px] overflow-hidden">
                <img :src="exp.main_image || '/images/default.jpg'" :alt="exp.title" class="w-full h-full object-cover" />
             </div>
@@ -100,8 +100,8 @@
         </div>
 
         <!-- Grid -->
-        <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory hide-scrollbar">
-          <div v-for="yacht in yachts.slice(0,4)" :key="yacht.id" class="min-w-[85vw] sm:min-w-[60vw] md:min-w-0 snap-center shrink-0 md:shrink bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div v-for="yacht in yachts.slice(0,4)" :key="yacht.id" class="bg-white rounded-[16px] overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-gray-100 flex flex-col transition-transform hover:-translate-y-1 group">
             
             <!-- Image Area -->
             <NuxtLink :to="`/yatlarimiz/${yacht.slug}`" class="relative h-[200px] overflow-hidden block">
@@ -281,13 +281,5 @@ onMounted(() => {
 .backdrop-blur-md {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 </style>
