@@ -808,7 +808,7 @@ const _inlineRuntimeConfig = {
         "sitemapName": "sitemap.xml",
         "route": "sitemap.xml",
         "defaults": {
-          "lastmod": "2026-04-25T00:35:39Z"
+          "lastmod": "2026-04-25T00:52:48Z"
         },
         "include": [],
         "exclude": [
@@ -6547,7 +6547,7 @@ const sources$1 = [
             },
             {
                 "loc": "/rezervasyon",
-                "lastmod": "2026-04-25T00:34:07.229Z"
+                "lastmod": "2026-04-25T00:52:06.648Z"
             },
             {
                 "loc": "/sikca-sorulanlar",
@@ -6563,7 +6563,7 @@ const sources$1 = [
             },
             {
                 "loc": "/",
-                "lastmod": "2026-04-24T23:23:48.895Z"
+                "lastmod": "2026-04-25T00:44:54.534Z"
             },
             {
                 "loc": "/contact"
